@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="divTabla" style="border: 2px solid black; display: inline-block; padding: 5px;">
+        <label>Form Datos</label>
+        <br>
+
+        <label for="filtro">Filtrar Por:</label>
+        <select id="filtro" name="filtro">
+            <option value="Todos">Todos</option>
+            <option value="Empleados">Empleados</option>
+            <option value="Clientes">Clientes</option>
+        </select>
+
+        <br>
+        <label for="edadPromedio">Calcular Edad Promedio:</label>
+        <input type="text" id="edadPromedio" name="edadPromedio" value="" disabled></input>
+        <button id="calcularPromedio">Calcular</button>
+        <br>
+
+        <label>Mostrar Columnas:
+            <br>
+            <input type="checkbox" id="ID" name="ID" checked>
+            ID
+            <input type="checkbox" id="Nombre" name="Nombre" checked>
+            Nombre
+            <input type="checkbox" id="Apellido" name="Apellido" checked>
+            Apellido
+            <input type="checkbox" id="Edad" name="Edad" checked>
+            Edad
+            <input type="checkbox" id="Compras" name="Compras" checked>
+            Compras
+            <input type="checkbox" id="Teléfono" name="Teléfono" checked>
+            Teléfono
+            <input type="checkbox" id="Sueldo" name="Sueldo" checked>
+            Sueldo
+            <input type="checkbox" id="Ventas" name="Ventas" checked>
+            Ventas
+        </label>
+
+        <br><br>
+
+        <table id="tablaPersonas">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>Compras</th>
+                    <th>Teléfono</th>
+                    <th>Sueldo</th>
+                    <th>Ventas</th>
+                </tr>
+            </thead>
+            <tbody id="tablaDePersonas">
+            </tbody>
+        </table>
+
+        <button id="btnAgregar">Agregar</button>
+    </div>
+
+    <div id="divABM" style="border: 2px solid black; display: inline-block; padding: 5px; display:none;">
+        <h1> Formulario ABM </h1>
+        <br>
+
+        <label for="id">Id:</label>
+        <input type="text" id="id" name="id" value=""></input>
+        <br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="" ></input>
+        <br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" value="" ></input>
+        <br>
+        <label for="edad">Edad:</label>
+        <input type="text" id="edad" name="edad" value="" ></input>
+        <br>
+        <label for="tipo">Tipo:</label>
+        <select name="tipo" id="selectTipo">
+            <option value="Empleado">Empleado</option>
+            <option value="Cliente">Cliente</option>
+        </select>
+        <br>
+
+        <label id="lblAtr5" for="txtAtr5">Sueldo:</label>
+        <input type="text" id="txtAtr5" name="txtAtr5" value="" ></input>
+        <br>
+        <label id="lblAtr6" for="txtAtr6">Ventas:</label>
+        <input type="text" id="txtAtr6" name="txtAtr6" value="" ></input>
+        <br>
+        <button>Aceptar</button> 
+        <button>Cancelar</button>
+    </div>
+    
+
+    <!-- ---------------- JAVA SCRIPT ---------------- -->
+
+    <!-- ---------------- VOY POR EL PUNTO D) ---------------- -->
+
+    <script>
+
+
+        
+
+        class Persona {
+            id;
+            nombre;
+            apellido;
+            edad;
+
+            constructor(id, nombre, apellido, edad) {
+                this.id = id;
+                this.nombre = nombre;
+                this.apellido = apellido;
+                this.edad = edad;
+            }
+
+            toString() {
+                return
+                "ID: " + this.id +
+                    ", Nombre: " + this.nombre +
+                    ", Apellido: " + this.apellido +
+                    ", Edad: " + this.edad;
+            }
+
+            toJson() {
+                return JSON.stringify({
+                    id: this.id,
+                    nombre: this.nombre,
+                    apellido: this.apellido,
+                    edad: this.edad
+                });
+            }
+        }
+
+        class Empleado extends Persona {
+            sueldo;
+            ventas;
+
+            constructor(id, nombre, apellido, edad, sueldo, ventas) {
+                super(id, nombre, apellido, edad);
+                this.sueldo = sueldo;
+                this.ventas = ventas;
+            }
+
+            toString() {
+                return super.toString(this.id, this.nombre, this.apellido, this.edad) +
+                    ", Sueldo: " + this.sueldo +
+                    ", Ventas: " + this.ventas;
+            }
+
+            toJson() {
+                return Object.assign({}, super.toJson(this), {
+                    sueldo: this.sueldo,
+                    ventas: this.ventas
+                });
+            }
+        }
+
+        class Cliente extends Persona {
+            compras;
+            telefono;
+
+            constructor(id, nombre, apellido, edad, compras, telefono) {
+                super(id, nombre, apellido, edad);
+                this.compras = compras;
+                this.telefono = telefono;
+            }
+
+            toString() {
+                return super.toString(this.id, this.nombre, this.apellido, this.edad) +
+                    ", Compras: " + this.compras +
+                    ", Teléfono: " + this.telefono;
+            }
+
+            toJson() {
+                return JSON.stringify(this);
+                JSON.parse
+            }
+        }
+
+        var divTabla = document.getElementById("divTabla");
+
+        var filtro = document.getElementById("filtro");
+        var elementosADibujar = document.getElementById("filtro").value;
+
+        var promedioEdades = document.getElementById("edadPromedio");
+        var botonCalcular = document.getElementById("calcularPromedio");
+
+        var id = document.getElementById("ID");
+        var nombre = document.getElementById("Nombre");
+        var apellido = document.getElementById("Apellido");
+        var edad = document.getElementById("Edad");
+        var compras = document.getElementById("Compras");
+        var telefono = document.getElementById("Teléfono");
+        var sueldo = document.getElementById("Sueldo");
+        var ventas = document.getElementById("Ventas");
+
+        var tablaDePersonas = document.getElementById("tablaDePersonas");
+        
+        var btnAgregar = document.getElementById("btnAgregar");
+
+        var divABM = document.getElementById("divABM");
+
+        var selectTipo = document.getElementById("selectTipo");
+        var txtAtr5 = document.getElementById("txtAtr5");
+        var lblAtr5 = document.getElementById("lblAtr5");
+        var txtAtr6 = document.getElementById("txtAtr6");
+        var lblAtr6 = document.getElementById("lblAtr6");
+        
+
+        function dibujarTabla(elementosADibujar) 
+        {
+
+            tablaDePersonas.innerHTML = "";
+            personas.forEach((persona) => {
+
+                if(persona instanceof Empleado && (elementosADibujar == "Todos" || elementosADibujar == "Empleados"))
+                {
+
+                    //Agrego una fila nueva
+                    var row = tablaDePersonas.insertRow();
+
+                    //Agrego una celda por cada atributo
+                    var idCell = row.insertCell();
+                    idCell.textContent = persona.id;
+
+                    var nombreCell = row.insertCell();
+                    nombreCell.textContent = persona.nombre;
+
+                    var apellidoCell = row.insertCell();
+                    apellidoCell.textContent = persona.apellido;
+
+                    var edadCell = row.insertCell();
+                    edadCell.textContent = persona.edad;
+
+                    var comprasCell = row.insertCell();
+                    comprasCell.textContent = "N/A";
+
+                    var telefonoCell = row.insertCell();
+                    telefonoCell.textContent = "N/A";
+
+                    var ventasCell = row.insertCell();
+                    ventasCell.textContent = persona.ventas;
+
+                    var sueldoCell = row.insertCell();
+                    sueldoCell.textContent = persona.sueldo;
+                }
+                else if (persona instanceof Cliente && (elementosADibujar == "Todos" || elementosADibujar == "Clientes"))
+                {
+                    var row = tablaDePersonas.insertRow();
+
+                    var idCell = row.insertCell();
+                    idCell.textContent = persona.id;
+
+                    var nombreCell = row.insertCell();
+                    nombreCell.textContent = persona.nombre;
+
+                    var apellidoCell = row.insertCell();
+                    apellidoCell.textContent = persona.apellido;
+
+                    var edadCell = row.insertCell();
+                    edadCell.textContent = persona.edad;
+
+                    var comprasCell = row.insertCell();
+                    comprasCell.textContent = persona.compras;
+
+                    var telefonoCell = row.insertCell();
+                    telefonoCell.textContent = persona.telefono;
+
+                    var ventasCell = row.insertCell();
+                    ventasCell.textContent = "N/A";
+
+                    var sueldoCell = row.insertCell();
+                    sueldoCell.textContent = "N/A";
+                }
+            });
+
+            pintarBordesTabla();
+        }
+
+        function pintarBordesTabla()
+        {
+            var celdas = document.querySelectorAll('td');
+            celdas.forEach(celda =>
+            {
+                celda.style.border='1px solid black';
+            });
+            var cabeceras = document.querySelectorAll('th');
+            cabeceras.forEach(cabecera =>
+            {
+                cabecera.style.border='2px solid black';
+            });
+        }
+
+        // Siimulación del resultado de un consulta http en json.
+        const db = '[{"id":1, "nombre":"Marcelo", "apellido":"Luque", "edad":45, "ventas":15000, "sueldo":2000},{"id":2,"nombre":"Ramiro", "apellido":"Escobar", "edad":35, "ventas": 6000, "sueldo": 1000},{"id":3, "nombre":"Facundo","apellido":"Cairo", "edad":30, "ventas":500, "sueldo":15000},{"id":4, "nombre":"Fernando", "apellido":"Nieto","edad":18, "compras":8000, "telefono":"152111131"},{"id":5, "nombre":"Manuel", "apellido":"Loza", "edad":20,"compras":50000, "telefono":"42040077"},{"id":666, "nombre":"Nicolas", "apellido":"Serrano", "edad":23,"compras":7000, "telefono":"1813181563"}]';
+
+        // convierto en un array de objetos
+        var data = JSON.parse(db);
+
+        // con la función map voy creando los objetos según corresponda
+        var personas = data.map(obj => {
+            if ('ventas' in obj) {
+                return new Empleado(obj.id, obj.nombre, obj.apellido, obj.edad, obj.ventas, obj.sueldo);
+            } else {
+                return new Cliente(obj.id, obj.nombre, obj.apellido, obj.edad, obj.compras, obj.telefono);
+            }
+        });
+
+        dibujarTabla(elementosADibujar);
+
+        botonCalcular.addEventListener("click", (event)=>
+        {   
+            var elementosADibujar = filtro.value;
+
+            if(elementosADibujar=="Empleados")
+            {
+                empleados = personas.filter((persona)=>
+                {
+                    return persona instanceof Empleado;
+                });
+                acumulado = empleados.reduce((acumulador, persona) => 
+                {
+                    return acumulador + persona.edad;
+                },0);
+                promedioEdades.value=acumulado/empleados.length;
+            }
+            else if(elementosADibujar=="Clientes")
+            {
+                clientes = personas.filter((persona)=>
+                {
+                    return persona instanceof Cliente;
+                });
+                acumulado = clientes.reduce((acumulador, persona) => 
+                {
+                    return acumulador + persona.edad;
+                },0);
+                promedioEdades.value=acumulado/clientes.length;
+            }
+            else
+            {
+                acumulado = personas.reduce((acumulador, persona) => 
+                {
+                    return acumulador + persona.edad;
+                },0);
+                promedioEdades.value=acumulado/personas.length;
+            }
+
+            // Acá lo había hecho sin Map/Reduce/Filter, más sencillo.
+
+            // var contador = 0;
+            // var elementosADibujar = document.getElementById("filtro").value;
+
+            // personas.forEach((persona) => {
+
+            //     if(persona instanceof Empleado && (elementosADibujar == "Todos" || elementosADibujar == "Empleados"))
+            //     {
+            //         contador++;
+            //         acumulador+=persona.edad;
+            //     }
+            //     else if (persona instanceof Cliente && (elementosADibujar == "Todos" || elementosADibujar == "Clientes"))
+            //     {
+            //         contador++;
+            //         acumulador+=persona.edad;
+            //     }
+            // });
+
+            //promedioEdades.value=acumulador/contador;
+        });
+
+        filtro.addEventListener("change", (event) =>
+        {
+            var elementosADibujar = event.target.value;
+            dibujarTabla(elementosADibujar);
+            if(filtro.value=="Empleados")
+            {
+                //activo y habilito los que van
+                ventas.checked=true;
+                sueldo.checked=true;
+                ventas.disabled=false;
+                sueldo.disabled=false;
+
+                //desctivo y deshabilito los que no
+                compras.checked=false;
+                telefono.checked=false;
+                compras.disabled=true;
+                telefono.disabled=true;
+            }
+            else if (filtro.value=="Clientes")
+            {
+                //activo y habilito los que van
+                compras.checked=true;
+                telefono.checked=true;
+                compras.disabled=false;
+                telefono.disabled=false;
+
+                //desctivo y deshabilito los que no
+                ventas.checked=false;
+                sueldo.checked=false;
+                ventas.disabled=true;
+                sueldo.disabled=true;
+            }
+            else
+            {
+                compras.checked=true;
+                telefono.checked=true;
+                ventas.checked=true;
+                sueldo.checked=true;
+                compras.disabled=false;
+                telefono.disabled=false;
+                ventas.disabled=false;
+                sueldo.disabled=false;
+            }
+        })   
+        
+        btnAgregar.addEventListener("click", (event)=>
+        {
+            divTabla.style.display="none";
+            divABM.style.display="inline-block";
+        });
+
+        selectTipo.addEventListener("change", (event)=>
+        {
+            if (selectTipo.value=="Cliente")
+            {
+                lblAtr5.textContent="Compras";
+                lblAtr6.textContent="Telefono";
+            }
+            else
+            {
+                lblAtr5.textContent="Sueldo";
+                lblAtr6.textContent="Ventas";
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

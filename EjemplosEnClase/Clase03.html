@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function $(id){
+            return document.getElementById(id);
+        }
+
+        function Felino(){
+            this.raza="Felino";
+            this.edad=function(){return this.años*9}
+        }
+        Felino.prototype.Hablar=function(){console.log("Maulla")};
+
+
+        function Canino(){
+            this.raza="Canino";
+            this.edad=function(){return this.años*7}
+        }
+        Canino.prototype.Hablar=function(){console.log("Ladra")};
+
+
+        function Perro(){
+            this.morder=function(){console.log("El Perro Muerde")}
+        }
+
+
+
+        function Gato(){
+            this.rasguñar=function(){console.log("El Gato Rasguña")}
+        }
+        
+        var c = new Canino();
+
+        var p = new Perro();
+        console.log("p instancia de Perro:"+ (p instanceof Perro));
+
+        //p.__proto__=c;
+        Object.setPrototypeOf(p,c);
+
+        console.log(p.raza);
+
+        p.años=1;
+
+        console.log(p.edad());
+
+        console.log("p instancia de Canino:"+ (p instanceof Canino));
+
+
+        
+
+
+
+
+
+
+        class Ciudadano {
+            constructor(p){
+                this.nacionalidad = p;
+            }
+            reportar(){
+                console.log("Nacionalidad: "+this.nacionalidad);
+            }
+        }
+
+        class Alumno extends Ciudadano {
+            constructor(n,a,d,p){
+                super(p);
+                this.nombre=n;
+                this.apellido=a;
+                this.dni=d;
+            }
+            reportar(){
+                super.reportar();
+                console.log("Nombre:" + this.nombre);
+            }
+        }
+
+        let miAlumno = new Alumno("Horacio","Serrano",1234567,"Argentino");
+
+
+        function vaciar(){
+            let b =$("cuerpo");
+            while(b.lastElementChild){
+                b.removeChild(b.lastElementChild);
+            }
+        }
+
+     
+        class Formulario {
+            constructor(n){
+                this.nodo = document.getElementById(n);
+                this.vaciar = vaciar;
+            }
+       
+        }
+
+
+
+    </script>
+
+
+</head>
+<body id="cuerpo">
+
+</body>
+
+</html>
+
+
