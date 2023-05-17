@@ -11,22 +11,22 @@
 <body>
 
     <div id="divTabla" style="border: 2px solid black; display: inline-block; padding: 5px;">
-        <label>Form Datos</label>
-        <br>
-
-        <label for="filtro">Filtrar Por:</label>
+        <label for="filtro">Form Datos</label><br>
+        <!-- Selector para filtrar por tipo -->
+        <label for="filtro"id="lblfiltro">Filtrar Por:</label>
         <select id="filtro" name="filtro">
             <option value="Todos">Todos</option>
             <option value="Heroes">Heroes</option>
             <option value="Villanos">Villanos</option>
         </select>
-
         <br>
-        <label for="edadPromedio">Calcular Edad Promedio:</label>
-        <input type="text" id="edadPromedio" name="edadPromedio" value="" disabled></input>
+
+        <!-- Campo para calcular la edad promedio -->
+        <label id="lbledadPromedio">Calcular Edad Promedio:<input type="text" id="edadPromedio" name="edadPromedio" value="" disabled></input></label>
         <button id="calcularPromedio">Calcular</button>
         <br>
 
+        <!-- Mostrar/ocultar columnas de la tabla -->
         <label>Mostrar Columnas:
             <br>
             <input type="checkbox" id="ID" name="ID" checked>
@@ -53,6 +53,7 @@
 
         <br><br>
 
+        <!-- Tabla para mostrar los datos -->
         <table id="tablaPersonas">
             <thead>
                 <tr>
@@ -72,42 +73,44 @@
             </tbody>
         </table>
 
+        <!-- Botón para agregar una nueva persona -->
         <button id="btnAgregar">Agregar</button>
     </div>
 
+    <!-- Formulario para agregar/editar una persona -->
     <div id="divABM" style="border: 2px solid black; display: inline-block; padding: 5px; display:none;">
         <h1> Formulario ABM </h1>
         <br>
 
-        <label for="id">Id:</label>
-        <input type="text" id="id" name="id" value="" disabled></input>
+        <label for="txtid" id="lblid">Id:</label>        
+        <input type="text" id="txtid" name="id" value="" disabled></input>
         <br>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="" ></input>
+        <label for="txtnombre" id="lblnombre">Nombre:</input></label>        
+        <input type="text" id="txtnombre" name="nombre" value="" >
         <br>
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" value="" ></input>
+        <label for="txtapellido" id="lblapellido">Apellido:</input></label>      
+        <input type="text" id="txtapellido" name="apellido" value="" > 
         <br>
-        <label for="edad">Edad:</label>
-        <input type="text" id="edad" name="edad" value="" ></input>
+        <label for="txtedad" id="lbledad">Edad:</input></label>
+        <input type="text" id="txtedad" name="edad" value="" >
         <br>
-        <label for="tipo">Tipo:</label>
+        <label for="selectTipo" id="lbltipo">Tipo:</label>  
         <select name="tipo" id="selectTipo">
             <option value="Heroe">Heroe</option>
             <option value="Villano">Villano</option>
-        </select>
+        </select>      
         <br>
-
-        <label id="lblAtr5" for="txtAtr5">Alterego:</label>
+        <label for="txtAtr5" id="lblAtr5">Alterego:</label>
         <input type="text" id="txtAtr5" name="txtAtr5" value="" ></input>
         <br>
-        <label id="lblAtr6" for="txtAtr6">Ciudad:</label>
+        <label for="txtAtr6" id="lblAtr6">Ciudad:</label>
         <input type="text" id="txtAtr6" name="txtAtr6" value="" ></input>
         <br>
-        <label id="lblAtr7" for="txtAtr7">Publicado:</label>
+        <label for="txtAtr7" id="lblAtr7">Publicado:</label>
         <input type="text" id="txtAtr7" name="txtAtr7" value="" ></input>
         <br>
         <button id="btnAceptar">Aceptar</button> 
+        <button id="btnEliminar">Eliminar</button>
         <button id="btnCancelar">Cancelar</button>
     </div>
     
@@ -128,21 +131,21 @@
                 this.edad = edad;
             }
 
-            toString() {
-                return "ID: " + this.id +                  
-                ", Nombre: " + this.nombre +                    
-                ", Apellido: " + this.apellido +                    
-                ", Edad: " + this.edad;
-            }
+            // toString() {
+            //     return "ID: " + this.id +                  
+            //     ", Nombre: " + this.nombre +                    
+            //     ", Apellido: " + this.apellido +                    
+            //     ", Edad: " + this.edad;
+            // }
 
-            toJson() {
-                return JSON.stringify({
-                    id: this.id,
-                    nombre: this.nombre,
-                    apellido: this.apellido,
-                    edad: this.edad
-                });
-            }
+            // toJson() {
+            //     return JSON.stringify({
+            //         id: this.id,
+            //         nombre: this.nombre,
+            //         apellido: this.apellido,
+            //         edad: this.edad
+            //     });
+            // }
         }
 
         class Heroe extends Persona {
@@ -157,24 +160,24 @@
                 this.publicado = publicado;
             }
 
-            toString() {
-                return super.toString(this.id, this.nombre, this.apellido, this.edad) +
-                    ", Alterego: " + this.alterEgo +
-                    ", Ciudad: " + this.ciudad +
-                    ", Publicado en: " + this.publicado;
-            }
+            // toString() {
+            //     return super.toString(this.id, this.nombre, this.apellido, this.edad) +
+            //         ", Alterego: " + this.alterEgo +
+            //         ", Ciudad: " + this.ciudad +
+            //         ", Publicado en: " + this.publicado;
+            // }
 
-            toJson() {
-                return JSON.stringify({
-                    id: this.id,
-                    nombre: this.nombre,
-                    apellido: this.apellido,
-                    edad: this.edad,
-                    alterEgo: this.alterEgo,
-                    ciudad: this.ciudad,
-                    publicado: this.publicado
-                });
-            }
+            // toJson() {
+            //     return JSON.stringify({
+            //         id: this.id,
+            //         nombre: this.nombre,
+            //         apellido: this.apellido,
+            //         edad: this.edad,
+            //         alterEgo: this.alterEgo,
+            //         ciudad: this.ciudad,
+            //         publicado: this.publicado
+            //     });
+            // }
         }
 
         class Villano extends Persona {
@@ -189,58 +192,65 @@
                 this.asesinatos = asesinatos;
             }
 
-            toString() {
-                return super.toString(this.id, this.nombre, this.apellido, this.edad) +
-                    ", Enemigo: " + this.enemigo +
-                    ", Robos: " + this.robos+
-                    ", Asesinatos: " + this.asesinatos;
-            }
+            // toString() {
+            //     return super.toString(this.id, this.nombre, this.apellido, this.edad) +
+            //         ", Enemigo: " + this.enemigo +
+            //         ", Robos: " + this.robos+
+            //         ", Asesinatos: " + this.asesinatos;
+            // }
 
-            toJson() {
-                return JSON.stringify({
-                    id: this.id,
-                    nombre: this.nombre,
-                    apellido: this.apellido,
-                    edad: this.edad,
-                    enemigo: this.enemigo,
-                    robos: this.robos,
-                    asesinatos: this.asesinatos
-                });
-            }
+            // toJson() {
+            //     return JSON.stringify({
+            //         id: this.id,
+            //         nombre: this.nombre,
+            //         apellido: this.apellido,
+            //         edad: this.edad,
+            //         enemigo: this.enemigo,
+            //         robos: this.robos,
+            //         asesinatos: this.asesinatos
+            //     });
+            // }
         }
 
+        //Div contenedor de la tabla
         var divTabla = document.getElementById("divTabla");
 
+        //selector filtro y su valor
         var filtro = document.getElementById("filtro");
         var elementosADibujar = document.getElementById("filtro").value;
 
+        //Txtbox para el promedio y su boton calcular
         var promedioEdades = document.getElementById("edadPromedio");
         var botonCalcular = document.getElementById("calcularPromedio");
 
-        var id = document.getElementById("ID");
-        var nombre = document.getElementById("Nombre");
-        var apellido = document.getElementById("Apellido");
-        var edad = document.getElementById("Edad");
+        //CheckBoxes
+        var chkid = document.getElementById("ID");
+        var chknombre = document.getElementById("Nombre");
+        var chkapellido = document.getElementById("Apellido");
+        var chkedad = document.getElementById("Edad");
+        var chkalterEgo = document.getElementById("Alterego");
+        var chkciudad = document.getElementById("Ciudad");
+        var chkpublicado = document.getElementById("Publicado");
+        var chkenemigo = document.getElementById("Enemigo");        
+        var chkrobos = document.getElementById("Robos");        
+        var chkasesinatos = document.getElementById("Asesinatos");
 
-        var alterEgo = document.getElementById("Alterego");
-        var ciudad = document.getElementById("Ciudad");
-        var publicado = document.getElementById("Publicado");
-        
-        var Enemigo = document.getElementById("Enemigo");        
-        var Robos = document.getElementById("Robos");        
-        var Asesinatos = document.getElementById("Asesinatos");
-
+        //Tabla sin los headers
         var tablaDePersonas = document.getElementById("tablaDePersonas");
 
+        //Array de filas de la tabla sin los headers
         var filas = tablaDePersonas.querySelectorAll('tr');
         
+        //btn agregar persona
         var btnAgregar = document.getElementById("btnAgregar");
 
+        //Div contenedor de formulario ABM
         var divABM = document.getElementById("divABM");
 
-        var nombre = document.getElementById("nombre").value;
-        var apellido = document.getElementById("apellido").value;
-        var edad = document.getElementById("edad").value;
+        //Campos ABM
+        var txtnombre = document.getElementById("txtnombre").value;
+        var txtapellido = document.getElementById("txtapellido").value;
+        var txtedad = document.getElementById("txtedad").value;
         var selectTipo = document.getElementById("selectTipo");
         var txtAtr5 = document.getElementById("txtAtr5").value;
         var lblAtr5 = document.getElementById("lblAtr5");
@@ -249,17 +259,22 @@
         var txtAtr7 = document.getElementById("txtAtr7").value;
         var lblAtr7 = document.getElementById("lblAtr7");
         
+        //Aceptar y Cancelar Formulario ABM
         var btnAceptar = document.getElementById("btnAceptar");
+        var btnEliminar = document.getElementById("btnEliminar");
         var btnCancelar = document.getElementById("btnCancelar");
         
+        //variable switch altterna mostrar tabla o formulario ABM
         var mostrarTabla = true;
+
+        //Guardo el ultimo id usado
         var ultimoID = 666;
 
         function levantarDatosFormulario()
         {
-            nombre = document.getElementById("nombre").value;
-            apellido = document.getElementById("apellido").value;
-            edad = document.getElementById("edad").value;
+            txtnombre = document.getElementById("txtnombre").value;
+            txtapellido = document.getElementById("txtapellido").value;
+            txtedad = document.getElementById("txtedad").value;
             selectTipo = document.getElementById("selectTipo");
             txtAtr5 = document.getElementById("txtAtr5").value;
             txtAtr6 = document.getElementById("txtAtr6").value;
@@ -268,10 +283,10 @@
 
         function blanquearFormulario()
         {
-            document.getElementById("id").value="";
-            document.getElementById("nombre").value="";
-            document.getElementById("apellido").value="";
-            document.getElementById("edad").value="";
+            document.getElementById("txtid").value="";
+            document.getElementById("txtnombre").value="";
+            document.getElementById("txtapellido").value="";
+            document.getElementById("txtedad").value="";
             document.getElementById("txtAtr5").value="";
             document.getElementById("txtAtr6").value="";
             document.getElementById("txtAtr7").value="";
@@ -284,17 +299,23 @@
                 mostrarTabla=false;
                 divTabla.style.display="none";
                 divABM.style.display="inline-block";
-                document.getElementById("id").value=ultimoID+1;
+                document.getElementById("txtid").value=ultimoID+1;
+
+                dibujarTabla();
             }else
             {
                 mostrarTabla=true;
                 divTabla.style.display="inline-block";
                 divABM.style.display="none";
+
+                dibujarTabla();
             }
         }
 
-        function dibujarTabla(elementosADibujar) 
+        function dibujarTabla() 
         {
+            filtro = document.getElementById("filtro");
+            elementosADibujar = filtro.value;
 
             tablaDePersonas.innerHTML = "";
             personas.forEach((persona) => {
@@ -376,8 +397,8 @@
                     asesinatosCell.textContent = persona.asesinatos;
                 }
             });
-
             pintarBordesTabla();
+            refrescarEventListener();
         }
 
         function pintarBordesTabla()
@@ -397,21 +418,25 @@
         function refrescarEventListener()
         {
             filas = tablaDePersonas.querySelectorAll('tr');
+            var personaAEditar;
+            var idPersona;
             filas.forEach((fila)=> 
             {
                 fila.addEventListener('dblclick', () => {
-                    var idPersona = event.target.closest('tr').getAttribute('id');
+                    btnEliminar.disabled=false;
+                    selectTipo.disabled=true;
+                    idPersona = event.target.closest('tr').getAttribute('id');
                     
                     alternarVista();
 
-                    var personaAEditar = personas.reduce((personaAEditar, persona)=>
+                    personaAEditar = personas.reduce((personaAEditar, persona)=>
                     {
                         if(persona.id==idPersona)
                         {
-                            document.getElementById("id").value = persona.id;
-                            document.getElementById("nombre").value = persona.nombre;
-                            document.getElementById("apellido").value = persona.apellido;
-                            document.getElementById("edad").value = persona.edad;
+                            document.getElementById("txtid").value = persona.id;
+                            document.getElementById("txtnombre").value = persona.nombre;
+                            document.getElementById("txtapellido").value = persona.apellido;
+                            document.getElementById("txtedad").value = persona.edad;
                             if (persona instanceof Heroe)
                             {
                                 selectTipo.value="Heroe";
@@ -440,7 +465,7 @@
         }
 
         // Siimulación del resultado de un consulta http en json.
-        const db = 
+        const DB = 
         '[{"id":1, "nombre":"Clark", "apellido":"Kent", "edad":45, "alterego":"Superman", "ciudad":"Metropolis","publicado":2002},\
         {"id":2, "nombre":"Bruce", "apellido":"Wayne", "edad":35, "alterego":"Batman", "ciudad":"Gotica","publicado":20012},\
         {"id":3, "nombre":"Bart", "apellido":"Alen", "edad":30, "alterego":"Flash", "ciudad":"Central","publicado":2017},\
@@ -449,7 +474,7 @@
         {"id":666, "nombre":"Celina", "apellido":"kyle", "edad":23, "enemigo":"Batman", "robos":25,"asesinatos":1}]'
 
         // convierto en un array de objetos
-        var data = JSON.parse(db);
+        var data = JSON.parse(DB);
 
         // con la función map voy creando los objetos según corresponda
         var personas = data.map(obj => {
@@ -460,11 +485,7 @@
             }
         });
 
-        dibujarTabla(elementosADibujar);
-
-        levantarDatosFormulario();
-
-        refrescarEventListener();
+        dibujarTabla();
 
         botonCalcular.addEventListener("click", (event)=>
         {   
@@ -511,67 +532,69 @@
             if(filtro.value=="Heroes")
             {
                 //activo y habilito los que van
-                alterEgo.checked=true;
-                ciudad.checked=true;
-                publicado.checked=true;
+                chkalterEgo.checked=true;
+                chkciudad.checked=true;
+                chkpublicado.checked=true;
 
-                alterEgo.disabled=false;
-                ciudad.disabled=false;
-                publicado.disabled=false;
+                chkalterEgo.disabled=false;
+                chkciudad.disabled=false;
+                chkpublicado.disabled=false;
 
                 //desctivo y deshabilito los que no
-                enemigo.checked=false;
-                robos.checked=false;
-                asesinatos.checked=false;
+                chkenemigo.checked=false;
+                chkrobos.checked=false;
+                chkasesinatos.checked=false;
 
-                enemigo.disabled=true;
-                robos.disabled=true;
-                asesinatos.disabled=true;
+                chkenemigo.disabled=true;
+                chkrobos.disabled=true;
+                chkasesinatos.disabled=true;
             }
             else if (filtro.value=="Villanos")
             {
                 //activo y habilito los que van
-                enemigo.checked=true;
-                robos.checked=true;
-                asesinatos.checked=true;
+                chkenemigo.checked=true;
+                chkrobos.checked=true;
+                chkasesinatos.checked=true;
 
-                enemigo.disabled=false;
-                robos.disabled=false;
-                asesinatos.disabled=false;
+                chkenemigo.disabled=false;
+                chkrobos.disabled=false;
+                chkasesinatos.disabled=false;
 
                 //desctivo y deshabilito los que no
-                alterEgo.checked=false;
-                ciudad.checked=false;
-                publicado.checked=false;
+                chkalterEgo.checked=false;
+                chkciudad.checked=false;
+                chkpublicado.checked=false;
 
-                alterEgo.disabled=true;
-                ciudad.disabled=true;
-                publicado.disabled=true;
+                chkalterEgo.disabled=true;
+                chkciudad.disabled=true;
+                chkpublicado.disabled=true;
             }
             else
             {
-                alterEgo.checked=true;
-                ciudad.checked=true;
-                publicado.checked=true;
+                chkalterEgo.checked=true;
+                chkciudad.checked=true;
+                chkpublicado.checked=true;
 
-                enemigo.checked=true;
-                robos.checked=true;
-                asesinatos.checked=true;
+                chkenemigo.checked=true;
+                chkrobos.checked=true;
+                chkasesinatos.checked=true;
 
-                alterEgo.disabled=false;
-                ciudad.disabled=false;
-                publicado.disabled=false;
+                chkalterEgo.disabled=false;
+                chkciudad.disabled=false;
+                chkpublicado.disabled=false;
 
-                enemigo.disabled=false;
-                robos.disabled=false;
-                asesinatos.disabled=false;
+                chkenemigo.disabled=false;
+                chkrobos.disabled=false;
+                chkasesinatos.disabled=false;
             }
         })   
         
         btnAgregar.addEventListener("click", (event)=>
         {
             alternarVista();
-            refrescarEventListener();
+            dibujarTabla();
+            btnEliminar.disabled=true;
+            selectTipo.disabled=false;
         });
 
         selectTipo.addEventListener("change", (event)=>
@@ -593,7 +616,17 @@
         btnCancelar.addEventListener("click",(event)=>
         {
             alternarVista();
+            blanquearFormulario();
             refrescarEventListener();
+        });
+
+        btnEliminar.addEventListener("click",(event)=>
+        {
+            personas = personas.filter((persona) => persona.id != document.getElementById("txtid").value);
+
+            alternarVista();
+            blanquearFormulario();
+            dibujarTabla();
         });
 
         btnAceptar.addEventListener("click",(event)=>
@@ -601,7 +634,7 @@
             levantarDatosFormulario();
             var error = false;
             var existe = false;
-            var idATrabajar = document.getElementById("id").value;
+            var idATrabajar = document.getElementById("txtid").value;
 
             for (var i = 0; i < personas.length; i++) 
             {
@@ -611,9 +644,7 @@
                 }
             }
 
-
-
-            if (nombre!="" && apellido!="" && edad!="" && !isNaN(edad))
+            if (txtnombre!="" && txtapellido!="" && txtedad!="" && !isNaN(txtedad))
             {
                 if (selectTipo.value=="Heroe")
                 {
@@ -621,15 +652,15 @@
                     {
                         if(existe==false)
                         {
-                            nuevoHeroe = new Heroe(ultimoID+1,nombre,apellido,edad,txtAtr5,txtAtr6,txtAtr7);
+                            nuevoHeroe = new Heroe(ultimoID+1,txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
                             personas.push(nuevoHeroe);
                             ultimoID++;
                         }
                         else
                         {
-                            personas[existe].nombre=document.getElementById("nombre").value;
-                            personas[existe].apellido=document.getElementById("apellido").value;
-                            personas[existe].edad=document.getElementById("edad").value;
+                            personas[existe].nombre=document.getElementById("txtnombre").value;
+                            personas[existe].apellido=document.getElementById("txtapellido").value;
+                            personas[existe].edad=document.getElementById("txtedad").value;
                             personas[existe].alterEgo=document.getElementById("txtAtr5").value;
                             personas[existe].ciudad=document.getElementById("txtAtr6").value;
                             personas[existe].publicado=document.getElementById("txtAtr7").value;
@@ -646,15 +677,15 @@
                     {
                         if(existe==false)
                         {
-                            nuevoVillano = new Villano(ultimoID+1,nombre,apellido,edad,txtAtr5,txtAtr6,txtAtr7);
+                            nuevoVillano = new Villano(ultimoID+1,txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
                             personas.push(nuevoVillano);
                             ultimoID++;
                         }
                         else
                         {
-                            personas[existe].nombre=document.getElementById("nombre").value;
-                            personas[existe].apellido=document.getElementById("apellido").value;
-                            personas[existe].edad=document.getElementById("edad").value;
+                            personas[existe].nombre=document.getElementById("txtnombre").value;
+                            personas[existe].apellido=document.getElementById("txtapellido").value;
+                            personas[existe].edad=document.getElementById("txtedad").value;
                             personas[existe].enemigo=document.getElementById("txtAtr5").value;
                             personas[existe].robos=document.getElementById("txtAtr6").value;
                             personas[existe].asesinatos=document.getElementById("txtAtr7").value;
@@ -677,10 +708,23 @@
             else
             {
                 alternarVista();
-                dibujarTabla(elementosADibujar);
+                dibujarTabla();
                 blanquearFormulario();
             }
         });
+
+        /*
+
+
+            TO DO:
+
+            IMPLEMENTAR ESTILOS
+
+            ORDENAR AL TOCAR UN HEADER
+
+            OCULTAR/MOSTRAR COLUMNAS
+
+        */
 
     </script>
 
