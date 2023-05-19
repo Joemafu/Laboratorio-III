@@ -17,11 +17,6 @@
         background-color: rgb(135, 173, 207);
     }
 
-    #divABM
-    {
-        background-color: rgb(243, 164, 137);
-    }
-
     #headers
     {
         background-color: brown;
@@ -45,7 +40,69 @@
         justify-content: center;
     }
 
-      
+
+
+
+
+    #divABM
+    {
+        background-color: rgb(243, 164, 137);
+        border: 2px solid black;
+        display: inline-block;
+        padding: 5px;
+        display: none;
+        text-align: center;
+        display: none;
+    }
+
+    #divABM h1 {
+        margin-top: 0;
+    }
+
+    #divABM label {
+        display: block;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+    #divABM input[type="text"],
+    #divABM select {
+        display: flex;
+        width: 200px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    #divABM button {
+        flex: 1;
+        padding: 5px 10px;
+        margin: 5px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        #divABM {
+            display: block;
+        }
+
+        #divABM button {
+            flex-basis: 100%;
+        }
+
+        #divABM label{
+            flex-basis: 50%;
+        }
+
+        #divABM input[type="text"],select {
+            flex-basis: 50%;
+        }
+
+        
+    }
+
     </style>
     <title>LaboIII PP Joel Mahafud</title>
 </head>
@@ -53,7 +110,7 @@
 <body>
 
     <div id="divTabla" style="border: 2px solid black; display: inline-block; padding: 5px;">
-        <label for="filtro">Form Datos</label><br>
+        <h1>HEROES & VILLANOS</h1>
         <!-- Selector para filtrar por tipo -->
         <label for="filtro"id="lblfiltro">Filtrar Por:</label>
         <select id="filtro" name="filtro">
@@ -118,38 +175,37 @@
     </div>
 
     <!-- Formulario para agregar/editar una persona -->
-    <div id="divABM" style="border: 2px solid black; display: inline-block; padding: 5px; display:none;">
-        <h1> Formulario ABM </h1>
-        <br>
-
-        <label for="txtid" id="lblid">Id:</label>        
-        <input type="text" id="txtid" name="id" value="" disabled></input>
-        <br>
-        <label for="txtnombre" id="lblnombre">Nombre:</input></label>        
-        <input type="text" id="txtnombre" name="nombre" value="" >
-        <br>
-        <label for="txtapellido" id="lblapellido">Apellido:</input></label>      
-        <input type="text" id="txtapellido" name="apellido" value="" > 
-        <br>
-        <label for="txtedad" id="lbledad">Edad:</input></label>
-        <input type="text" id="txtedad" name="edad" value="" >
-        <br>
-        <label for="selectTipo" id="lbltipo">Tipo:</label>  
+    <div id="divABM">
+        <h1>Formulario ABM</h1>
+    
+        <label for="txtid" id="lblid">Id:</label>
+        <input type="text" id="txtid" name="id" value="" disabled>
+        
+        <label for="txtnombre" id="lblnombre">Nombre:</label>
+        <input type="text" id="txtnombre" name="nombre" value="">
+        
+        <label for="txtapellido" id="lblapellido">Apellido:</label>
+        <input type="text" id="txtapellido" name="apellido" value="">
+        
+        <label for="txtedad" id="lbledad">Edad:</label>
+        <input type="text" id="txtedad" name="edad" value="">
+        
+        <label for="selectTipo" id="lbltipo">Tipo:</label>
         <select name="tipo" id="selectTipo">
             <option value="Heroe">Heroe</option>
             <option value="Villano">Villano</option>
-        </select>      
-        <br>
+        </select>
+        
         <label for="txtAtr5" id="lblAtr5">Alterego:</label>
-        <input type="text" id="txtAtr5" name="txtAtr5" value="" ></input>
-        <br>
+        <input type="text" id="txtAtr5" name="txtAtr5" value="">
+        
         <label for="txtAtr6" id="lblAtr6">Ciudad:</label>
-        <input type="text" id="txtAtr6" name="txtAtr6" value="" ></input>
-        <br>
+        <input type="text" id="txtAtr6" name="txtAtr6" value="">
+        
         <label for="txtAtr7" id="lblAtr7">Publicado:</label>
-        <input type="text" id="txtAtr7" name="txtAtr7" value="" ></input>
-        <br>
-        <button id="btnAceptar">Aceptar</button> 
+        <input type="text" id="txtAtr7" name="txtAtr7" value="">
+        
+        <button id="btnAceptar">Aceptar</button>
         <button id="btnEliminar">Eliminar</button>
         <button id="btnCancelar">Cancelar</button>
     </div>
@@ -360,6 +416,15 @@
             elementosADibujar = filtro.value;
 
             tablaDePersonas.innerHTML = "";
+
+
+
+
+
+
+
+
+            
             personas.forEach((persona) => {
 
                 if(persona instanceof Heroe && (elementosADibujar == "Todos" || elementosADibujar == "Heroes"))
