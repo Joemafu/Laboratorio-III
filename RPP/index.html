@@ -6,15 +6,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-    
-    .oculta 
-    {
-        display: none;
-    }   
-    
-    #divTabla
-    {
+
+body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: rgb(184, 200, 252);        
+    }
+
+    #divTabla {
+        border: 2px solid black;
+        padding: 20px;
+        text-align: center;
         background-color: rgb(135, 173, 207);
+    }
+
+    #divTabla h1 {
+        margin-top: 0;
+    }
+
+    #lblfiltro {
+        font-weight: bold;
+    }
+
+    #lbledadPromedio {
+        display: block;
+        font-weight: bold;
+    }
+
+    #edadPromedio {
+        width: 100px;
+        margin-right: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    #calcularPromedio {
+        padding: 5px 10px;
+        background-color: #4fafdb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #calcularPromedio:hover {
+        background-color: #216d85;
+    }
+
+    #divTabla label {
+        display: inline-block;
+        margin: 5px;
+        vertical-align: middle;
+    }
+
+    #divTabla input[type="checkbox"] {
+        margin: 0 5px;
+        vertical-align: middle;
+    }
+
+    #tablaEntera {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    #tablaEntera th,
+    #tablaEntera td {
+        padding: 8px;
+        border: 1px solid #080808;
     }
 
     #headers
@@ -29,29 +94,26 @@
         background-color: rgb(210, 210, 210);
     }
 
-    #tablaEntera
-    {
-        background-color: rgb(68, 67, 67);
+    #btnAgregar {
+        padding: 8px 20px;
+        background-color: #4fafdb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
     }
 
-    table
-    {
-        font-family:  'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        justify-content: center;
+    #btnAgregar:hover {
+        background-color: #216d85;
     }
 
-
-
-
-
-    #divABM
-    {
-        background-color: rgb(243, 164, 137);
+    #divABM {
         border: 2px solid black;
-        display: inline-block;
-        padding: 5px;
-        display: none;
+        padding: 20px;
         text-align: center;
+        background-color: rgb(243, 164, 137);
+        margin-top: 20px;
         display: none;
     }
 
@@ -61,13 +123,12 @@
 
     #divABM label {
         display: block;
-        margin-bottom: 5px;
-        text-align: left;
+        margin-bottom: 10px;
+        font-weight: bold;
     }
 
     #divABM input[type="text"],
     #divABM select {
-        display: flex;
         width: 200px;
         padding: 5px;
         border: 1px solid #ccc;
@@ -75,80 +136,84 @@
     }
 
     #divABM button {
-        flex: 1;
-        padding: 5px 10px;
-        margin: 5px;
+        padding: 8px 20px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        margin-top: 20px;
     }
 
     @media (max-width: 768px) {
-        #divABM {
+        #divTabla {
+            padding: 10px;
+        }
+
+        #divTabla input[type="checkbox"] {
             display: block;
+            margin: 5px auto;
         }
 
+        #tablaEntera {
+            font-size: 12px;
+        }
+
+        #btnAgregar,
         #divABM button {
-            flex-basis: 100%;
+            padding: 5px 10px;
         }
-
-        #divABM label{
-            flex-basis: 50%;
-        }
-
-        #divABM input[type="text"],select {
-            flex-basis: 50%;
-        }
-
-        
     }
+    
+     .oculta 
+    {
+        display: none;
+    }   
 
     </style>
-    <title>LaboIII PP Joel Mahafud</title>
+    <title>LaboIII RPP Joel Mahafud</title>
 </head>
 
 <body>
 
     <div id="divTabla" style="border: 2px solid black; display: inline-block; padding: 5px;">
-        <h1>HEROES & VILLANOS</h1>
+        <h1>FUTBOLISTAS & PROFESIONALES</h1>
         <!-- Selector para filtrar por tipo -->
         <label for="filtro"id="lblfiltro">Filtrar Por:</label>
         <select id="filtro" name="filtro">
             <option value="Todos">Todos</option>
-            <option value="Heroes">Heroes</option>
-            <option value="Villanos">Villanos</option>
+            <option value="Futbolistas">Futbolistas</option>
+            <option value="Profesionals">Profesionals</option>
         </select>
-        <br>
+        <br><br>
 
         <!-- Campo para calcular la edad promedio -->
         <label id="lbledadPromedio">Calcular Edad Promedio:<input type="text" id="edadPromedio" name="edadPromedio" value="" disabled></input></label>
         <button id="calcularPromedio">Calcular</button>
-        <br>
+        <br><br>
 
         <!-- Mostrar/ocultar columnas de la tabla -->
-        <label>Mostrar Columnas:</label>
-            <br>
-            <input type="checkbox" id="ID" class="chkbx" name="ID" checked>
-            <label for="ID">ID</label>
-            <input type="checkbox" id="Nombre" class="chkbx" name="Nombre" checked>
-            <label for="Nombre">Nombre</label>
-            <input type="checkbox" id="Apellido" class="chkbx" name="Apellido" checked>
-            <label for="Apellido">Apellido</label>
-            <input type="checkbox" id="Edad" class="chkbx" name="Edad" checked>
-            <label for="Edad">Edad</label>
-            <input type="checkbox" id="Alterego" class="chkbx" name="Alterego" checked>
-            <label for="Alterego">Alterego</label>
-            <input type="checkbox" id="Ciudad" class="chkbx" name="Ciudad" checked>
-            <label for="Ciudad">Ciudad</label>
-            <input type="checkbox" id="Publicado" class="chkbx" name="Publicado" checked>
-            <label for="Publicado">Publicado</label>
-            <input type="checkbox" id="Enemigo" class="chkbx" name="Enemigo" checked>
-            <label for="Enemigo">Enemigo</label>
-            <input type="checkbox" id="Robos" class="chkbx" name="Robos" checked>
-            <label for="Robos">Robos</label>
-            <input type="checkbox" id="Asesinatos" class="chkbx" name="Asesinatos" checked>
-            <label for="Asesinatos">Asesinatos</label>
-        <br><br>
+        <label>Mostrar Columnas:</label>  
+        <br>
+        <input type="checkbox" id="ID" class="chkbx" name="ID" checked>
+        <label for="ID">ID</label>
+        <input type="checkbox" id="Nombre" class="chkbx" name="Nombre" checked>
+        <label for="Nombre">Nombre</label>
+        <input type="checkbox" id="Apellido" class="chkbx" name="Apellido" checked>
+        <label for="Apellido">Apellido</label>
+        <input type="checkbox" id="Edad" class="chkbx" name="Edad" checked>
+        <label for="Edad">Edad</label>
+        <input type="checkbox" id="Equipo" class="chkbx" name="Equipo" checked>
+        <label for="Equipo">Equipo</label>
+        <input type="checkbox" id="Posicion" class="chkbx" name="Posicion" checked>
+        <label for="Posicion">Posición</label>
+        <input type="checkbox" id="CantidadGoles" class="chkbx" name="CantidadGoles" checked>
+        <label for="CantidadGoles">Cantidad de Goles</label>
+        <input type="checkbox" id="Titulo" class="chkbx" name="Titulo" checked>
+        <label for="Titulo">Titulo</label>
+        <input type="checkbox" id="Facultad" class="chkbx" name="Facultad" checked>
+        <label for="Facultad">Facultad</label>
+        <input type="checkbox" id="AnioGraduacion" class="chkbx" name="AnioGraduacion" checked>
+        <label for="AnioGraduacion">Año de Graduación</label>     
+        <br>
 
         <!-- Tabla para mostrar los datos -->
         <table id="tablaEntera">
@@ -158,12 +223,12 @@
                     <th class="tablaHeader columnaNombre">Nombre</th>
                     <th class="tablaHeader columnaApellido">Apellido</th>
                     <th class="tablaHeader columnaEdad">Edad</th>
-                    <th class="tablaHeader columnaAlterEgo">Alterego</th>
-                    <th class="tablaHeader columnaCiudad">Ciudad</th>
-                    <th class="tablaHeader columnaPublicado">Publicado</th>
-                    <th class="tablaHeader columnaEnemigo">Enemigo</th>
-                    <th class="tablaHeader columnaRobos">Robos</th>
-                    <th class="tablaHeader columnaAsesinatos">Asesinatos</th>
+                    <th class="tablaHeader columnaEquipo">Equipo</th>
+                    <th class="tablaHeader columnaPosicion">Posicion</th>
+                    <th class="tablaHeader columnaCantidadGoles">Cantidad de Goles</th>
+                    <th class="tablaHeader columnaTitulo">Titulo</th>
+                    <th class="tablaHeader columnaFacultad">Facultad</th>
+                    <th class="tablaHeader columnaAnioGraduacion">Año de Graduación</th>
                 </tr>
             </thead>
             <tbody id="tablaDePersonas">
@@ -192,17 +257,17 @@
         
         <label for="selectTipo" id="lbltipo">Tipo:</label>
         <select name="tipo" id="selectTipo">
-            <option value="Heroe">Heroe</option>
-            <option value="Villano">Villano</option>
+            <option value="Futbolista">Futbolista</option>
+            <option value="Profesional">Profesional</option>
         </select>
         
-        <label for="txtAtr5" id="lblAtr5">Alterego:</label>
+        <label for="txtAtr5" id="lblAtr5">Equipo:</label>
         <input type="text" id="txtAtr5" name="txtAtr5" value="">
         
-        <label for="txtAtr6" id="lblAtr6">Ciudad:</label>
+        <label for="txtAtr6" id="lblAtr6">Posicion:</label>
         <input type="text" id="txtAtr6" name="txtAtr6" value="">
         
-        <label for="txtAtr7" id="lblAtr7">Publicado:</label>
+        <label for="txtAtr7" id="lblAtr7">CantidadGoles:</label>
         <input type="text" id="txtAtr7" name="txtAtr7" value="">
         
         <button id="btnAceptar">Aceptar</button>
@@ -227,85 +292,52 @@
                 this.edad = edad;
             }
 
-            // toString() {
-            //     return "ID: " + this.id +                  
-            //     ", Nombre: " + this.nombre +                    
-            //     ", Apellido: " + this.apellido +                    
-            //     ", Edad: " + this.edad;
-            // }
-
-            // toJson() {
-            //     return JSON.stringify({
-            //         id: this.id,
-            //         nombre: this.nombre,
-            //         apellido: this.apellido,
-            //         edad: this.edad
-            //     });
-            // }
+            toString() {
+                return "ID: " + this.id +                  
+                ", Nombre: " + this.nombre +                    
+                ", Apellido: " + this.apellido +                    
+                ", Edad: " + this.edad;
+            }
         }
 
-        class Heroe extends Persona {
-            alterEgo;
-            ciudad;
-            publicado;
+        class Futbolista extends Persona {
+            equipo;
+            posicion;
+            cantidadGoles;
 
-            constructor(id, nombre, apellido, edad, alterEgo, ciudad, publicado) {
+            constructor(id, nombre, apellido, edad, equipo, posicion, cantidadGoles) {
                 super(id, nombre, apellido, edad);
-                this.alterEgo = alterEgo;
-                this.ciudad = ciudad;
-                this.publicado = publicado;
+                this.equipo = equipo;
+                this.posicion = posicion;
+                this.cantidadGoles = cantidadGoles;
             }
 
-            // toString() {
-            //     return super.toString(this.id, this.nombre, this.apellido, this.edad) +
-            //         ", Alterego: " + this.alterEgo +
-            //         ", Ciudad: " + this.ciudad +
-            //         ", Publicado en: " + this.publicado;
-            // }
-
-            // toJson() {
-            //     return JSON.stringify({
-            //         id: this.id,
-            //         nombre: this.nombre,
-            //         apellido: this.apellido,
-            //         edad: this.edad,
-            //         alterEgo: this.alterEgo,
-            //         ciudad: this.ciudad,
-            //         publicado: this.publicado
-            //     });
-            // }
+            toString() {
+                return super.toString(this.id, this.nombre, this.apellido, this.edad) +
+                    ", Equipo: " + this.equipo +
+                    ", Posicion: " + this.posicion +
+                    ", Cantidad de Goles: " + this.cantidadGoles;
+            }
         }
 
-        class Villano extends Persona {
-            enemigo;
-            robos;
-            asesinatos;
+        class Profesional extends Persona {
+            titulo;
+            facultad;
+            anioGraduacion;
 
-            constructor(id, nombre, apellido, edad, enemigo, robos, asesinatos) {
+            constructor(id, nombre, apellido, edad, titulo, facultad, anioGraduacion) {
                 super(id, nombre, apellido, edad);
-                this.enemigo = enemigo;
-                this.robos = robos;
-                this.asesinatos = asesinatos;
+                this.titulo = titulo;
+                this.facultad = facultad;
+                this.anioGraduacion = anioGraduacion;
             }
 
-            // toString() {
-            //     return super.toString(this.id, this.nombre, this.apellido, this.edad) +
-            //         ", Enemigo: " + this.enemigo +
-            //         ", Robos: " + this.robos+
-            //         ", Asesinatos: " + this.asesinatos;
-            // }
-
-            // toJson() {
-            //     return JSON.stringify({
-            //         id: this.id,
-            //         nombre: this.nombre,
-            //         apellido: this.apellido,
-            //         edad: this.edad,
-            //         enemigo: this.enemigo,
-            //         robos: this.robos,
-            //         asesinatos: this.asesinatos
-            //     });
-            // }
+            toString() {
+                return super.toString(this.id, this.nombre, this.apellido, this.edad) +
+                    ", Titulo: " + this.titulo +
+                    ", Facultad: " + this.facultad+
+                    ", Año de Graduación: " + this.anioGraduacion;
+            }
         }
 
         //Div contenedor de la tabla
@@ -324,12 +356,12 @@
         var chknombre = document.getElementById("Nombre");
         var chkapellido = document.getElementById("Apellido");
         var chkedad = document.getElementById("Edad");
-        var chkalterEgo = document.getElementById("Alterego");
-        var chkciudad = document.getElementById("Ciudad");
-        var chkpublicado = document.getElementById("Publicado");
-        var chkenemigo = document.getElementById("Enemigo");        
-        var chkrobos = document.getElementById("Robos");        
-        var chkasesinatos = document.getElementById("Asesinatos");
+        var chkequipo = document.getElementById("Equipo");
+        var chkposicion = document.getElementById("Posicion");
+        var chkcantidadGoles = document.getElementById("CantidadGoles");
+        var chktitulo = document.getElementById("Titulo");        
+        var chkfacultad = document.getElementById("Facultad");        
+        var chkanioGraduacion = document.getElementById("AnioGraduacion");
 
         //Tabla sin los headers
         var tablaDePersonas = document.getElementById("tablaDePersonas");
@@ -364,8 +396,9 @@
         var mostrarTabla = true;
 
         //Guardo el ultimo id usado
-        var ultimoID = 666;
+        var ultimoID = 6;
 
+        //El ordenamiento aplicado a la tabla
         var ordenAplicado = "idAsc";
 
         function levantarDatosFormulario()
@@ -416,18 +449,10 @@
             elementosADibujar = filtro.value;
 
             tablaDePersonas.innerHTML = "";
-
-
-
-
-
-
-
-
             
             personas.forEach((persona) => {
 
-                if(persona instanceof Heroe && (elementosADibujar == "Todos" || elementosADibujar == "Heroes"))
+                if(persona instanceof Futbolista && (elementosADibujar == "Todos" || elementosADibujar == "Futbolistas"))
                 {
 
                     //Agrego una fila nueva
@@ -453,31 +478,31 @@
                     edadCell.textContent = persona.edad;
                     edadCell.classList.add("columnaEdad"); 
 
-                    var alterEgoCell = row.insertCell();
-                    alterEgoCell.textContent = persona.alterEgo;
-                    alterEgoCell.classList.add("columnaAlterEgo"); 
+                    var equipoCell = row.insertCell();
+                    equipoCell.textContent = persona.equipo;
+                    equipoCell.classList.add("columnaEquipo"); 
 
-                    var ciudadCell = row.insertCell();
-                    ciudadCell.textContent = persona.ciudad;
-                    ciudadCell.classList.add("columnaCiudad"); 
+                    var posicionCell = row.insertCell();
+                    posicionCell.textContent = persona.posicion;
+                    posicionCell.classList.add("columnaPosicion"); 
 
-                    var publicadoCell = row.insertCell();
-                    publicadoCell.textContent = persona.publicado;
-                    publicadoCell.classList.add("columnaPublicado"); 
+                    var cantidadGolesCell = row.insertCell();
+                    cantidadGolesCell.textContent = persona.cantidadGoles;
+                    cantidadGolesCell.classList.add("columnaCantidadGoles"); 
 
-                    var enemigoCell = row.insertCell();
-                    enemigoCell.textContent = "N/A";
-                    enemigoCell.classList.add("columnaEnemigo"); 
+                    var tituloCell = row.insertCell();
+                    tituloCell.textContent = "N/A";
+                    tituloCell.classList.add("columnaTitulo"); 
 
-                    var robosCell = row.insertCell();
-                    robosCell.textContent = "N/A";
-                    robosCell.classList.add("columnaRobos"); 
+                    var facultadCell = row.insertCell();
+                    facultadCell.textContent = "N/A";
+                    facultadCell.classList.add("columnaFacultad"); 
 
-                    var asesinatosCell = row.insertCell();
-                    asesinatosCell.textContent = "N/A";
-                    asesinatosCell.classList.add("columnaAsesinatos"); 
+                    var anioGraduacionCell = row.insertCell();
+                    anioGraduacionCell.textContent = "N/A";
+                    anioGraduacionCell.classList.add("columnaAnioGraduacion"); 
                 }
-                else if (persona instanceof Villano && (elementosADibujar == "Todos" || elementosADibujar == "Villanos"))
+                else if (persona instanceof Profesional && (elementosADibujar == "Todos" || elementosADibujar == "Profesionals"))
                 {
                     var row = tablaDePersonas.insertRow();
                     
@@ -499,34 +524,32 @@
                     edadCell.textContent = persona.edad;
                     edadCell.classList.add("columnaEdad"); 
 
-                    var alterEgoCell = row.insertCell();
-                    alterEgoCell.textContent = "N/A";
-                    alterEgoCell.classList.add("columnaAlterEgo"); 
+                    var equipoCell = row.insertCell();
+                    equipoCell.textContent = "N/A";
+                    equipoCell.classList.add("columnaEquipo"); 
 
-                    var ciudadCell = row.insertCell();
-                    ciudadCell.textContent = "N/A";
-                    ciudadCell.classList.add("columnaCiudad"); 
+                    var posicionCell = row.insertCell();
+                    posicionCell.textContent = "N/A";
+                    posicionCell.classList.add("columnaPosicion"); 
 
-                    var publicadoCell = row.insertCell();
-                    publicadoCell.textContent = "N/A";
-                    publicadoCell.classList.add("columnaPublicado"); 
+                    var cantidadGolesCell = row.insertCell();
+                    cantidadGolesCell.textContent = "N/A";
+                    cantidadGolesCell.classList.add("columnaCantidadGoles"); 
 
-                    var enemigoCell = row.insertCell();
-                    enemigoCell.textContent = persona.enemigo;
-                    enemigoCell.classList.add("columnaEnemigo"); 
+                    var tituloCell = row.insertCell();
+                    tituloCell.textContent = persona.titulo;
+                    tituloCell.classList.add("columnaTitulo"); 
 
-                    var robosCell = row.insertCell();
-                    robosCell.textContent = persona.robos;
-                    robosCell.classList.add("columnaRobos"); 
+                    var facultadCell = row.insertCell();
+                    facultadCell.textContent = persona.facultad;
+                    facultadCell.classList.add("columnaFacultad"); 
 
-                    var asesinatosCell = row.insertCell();
-                    asesinatosCell.textContent = persona.asesinatos;
-                    asesinatosCell.classList.add("columnaAsesinatos"); 
+                    var anioGraduacionCell = row.insertCell();
+                    anioGraduacionCell.textContent = persona.anioGraduacion;
+                    anioGraduacionCell.classList.add("columnaAnioGraduacion"); 
                 }
             });
-            //pintarBordesTabla();
             refrescarEventListener();
-            //resetearCheckboxes();
             actualizarColumnas();
             colorearFilas();
         }
@@ -542,20 +565,6 @@
                 }
                 contador++;
             });            
-        }
-
-        function pintarBordesTabla()
-        {
-            var celdas = document.querySelectorAll('td');
-            celdas.forEach(celda =>
-            {
-                celda.style.border='1px solid black';
-            });
-            var cabeceras = document.querySelectorAll('th');
-            cabeceras.forEach(cabecera =>
-            {
-                cabecera.style.border='2px solid black';
-            });
         }
 
         function resetearCheckboxes()
@@ -579,17 +588,17 @@
        
         function mostrarOcultarColumna (nombre, ocultar)
         {
-            // Obtener la tabla
+            // Obtengo la tabla
             var headers = document.getElementById("headers");
             var tablaDatos = document.getElementById("tablaDePersonas");
 
-            // Obtener los elementos de encabezado y celdas de la columna a mostrar
+            // Obtengo los elementos de encabezado y celdas de la columna a mostrar
             var headerCell = headers.querySelector("th."+nombre);
             var cells = tablaDatos.querySelectorAll("td."+nombre);
 
             if(ocultar)
             {
-                // Agregar la clase "oculta" a los elementos de encabezado y celdas
+                // Agrego la clase "oculta" a los elementos de encabezado y celdas
                 headerCell.classList.add("oculta");
                 for (var i = 0; i < cells.length; i++) {
                 cells[i].classList.add("oculta");
@@ -597,7 +606,7 @@
             }       
             else
             {
-                // Eliminar la clase "oculta" de los elementos de encabezado y celdas
+                // Elimino la clase "oculta" de los elementos de encabezado y celdas
                 headerCell.classList.remove("oculta");
                 for (var i = 0; i < cells.length; i++) {
                 cells[i].classList.remove("oculta");
@@ -607,35 +616,25 @@
 
         function actualizarColumnas()
         {
-            //columna ID
             mostrarOcultarColumna("columnaID",!chkid.checked);
 
-            //columna Nombre
             mostrarOcultarColumna("columnaNombre",!chknombre.checked);
 
-            //columna Apellido
             mostrarOcultarColumna("columnaApellido",!chkapellido.checked);
 
-            //columna Edad
             mostrarOcultarColumna("columnaEdad",!chkedad.checked);
 
-            //columna AlterEgo
-            mostrarOcultarColumna("columnaAlterEgo",!chkalterEgo.checked);
+            mostrarOcultarColumna("columnaEquipo",!chkequipo.checked);
 
-            //columna Ciudad
-            mostrarOcultarColumna("columnaCiudad",!chkciudad.checked);
+            mostrarOcultarColumna("columnaPosicion",!chkposicion.checked);
 
-            //columna Publicado
-            mostrarOcultarColumna("columnaPublicado",!chkpublicado.checked);
+            mostrarOcultarColumna("columnaCantidadGoles",!chkcantidadGoles.checked);
 
-            //columna Enemigo
-            mostrarOcultarColumna("columnaEnemigo",!chkenemigo.checked);
+            mostrarOcultarColumna("columnaTitulo",!chktitulo.checked);
 
-            //columna Robos
-            mostrarOcultarColumna("columnaRobos",!chkrobos.checked);
+            mostrarOcultarColumna("columnaFacultad",!chkfacultad.checked);
 
-            //columna Asesinatos
-            mostrarOcultarColumna("columnaAsesinatos",!chkasesinatos.checked);
+            mostrarOcultarColumna("columnaAnioGraduacion",!chkanioGraduacion.checked);
         }
 
         function refrescarEventListener()
@@ -660,24 +659,24 @@
                             document.getElementById("txtnombre").value = persona.nombre;
                             document.getElementById("txtapellido").value = persona.apellido;
                             document.getElementById("txtedad").value = persona.edad;
-                            if (persona instanceof Heroe)
+                            if (persona instanceof Futbolista)
                             {
-                                selectTipo.value="Heroe";
+                                selectTipo.value="Futbolista";
                                 
-                                document.getElementById("txtAtr5").value= persona.alterEgo;
-                                document.getElementById("txtAtr6").value= persona.ciudad;
-                                document.getElementById("txtAtr7").value= persona.publicado;
+                                document.getElementById("txtAtr5").value= persona.equipo;
+                                document.getElementById("txtAtr6").value= persona.posicion;
+                                document.getElementById("txtAtr7").value= persona.cantidadGoles;
                             }
                             else
                             {
-                                selectTipo.value="Villano";
-                                document.getElementById("lblAtr5").textContent="Enemigo";
-                                document.getElementById("lblAtr6").textContent="Robos";
-                                document.getElementById("lblAtr7").textContent="Asesinatos";
+                                selectTipo.value="Profesional";
+                                document.getElementById("lblAtr5").textContent="Titulo";
+                                document.getElementById("lblAtr6").textContent="Facultad";
+                                document.getElementById("lblAtr7").textContent="AnioGraduacion";
                                 
-                                document.getElementById("txtAtr5").value= persona.enemigo;
-                                document.getElementById("txtAtr6").value= persona.robos;
-                                document.getElementById("txtAtr7").value= persona.asesinatos;
+                                document.getElementById("txtAtr5").value= persona.titulo;
+                                document.getElementById("txtAtr6").value= persona.facultad;
+                                document.getElementById("txtAtr7").value= persona.anioGraduacion;
                             }
 
                         }
@@ -756,92 +755,92 @@
                         dibujarTabla();
                         break;
                     }                    
-                    case "Alterego":
+                    case "Equipo":
                     {
-                        if (ordenAplicado == "alterEgoAsc")
+                        if (ordenAplicado == "equipoAsc")
                         {
-                            personas.sort(compararPorAlterEgoDesc);
-                            ordenAplicado="alterEgoDesc";
+                            personas.sort(compararPorEquipoDesc);
+                            ordenAplicado="equipoDesc";
                         }
                         else
                         {
-                            personas.sort(compararPorAlterEgo);
-                            ordenAplicado="alterEgoAsc";
+                            personas.sort(compararPorEquipo);
+                            ordenAplicado="equipoAsc";
                         }
                         dibujarTabla();
                         break;
                     }                    
-                    case "Ciudad":
+                    case "Posicion":
                     {
-                        if (ordenAplicado == "ciudadAsc")
+                        if (ordenAplicado == "posicionAsc")
                         {
-                            personas.sort(compararPorCiudadDesc);
-                            ordenAplicado="ciudadDesc";
+                            personas.sort(compararPorPosicionDesc);
+                            ordenAplicado="posicionDesc";
                         }
                         else
                         {
-                            personas.sort(compararPorCiudad);
-                            ordenAplicado="ciudadAsc";
+                            personas.sort(compararPorPosicion);
+                            ordenAplicado="posicionAsc";
                         }
                         dibujarTabla();
                         break;
                     }                    
-                    case "Publicado":
+                    case "Cantidad de Goles":
                     {
-                        if (ordenAplicado == "publicadoAsc")
+                        if (ordenAplicado == "cantidadGolesAsc")
                         {
-                            personas.sort(compararPorPublicadoDesc);
-                            ordenAplicado="publicadoDesc";
+                            personas.sort(compararPorCantidadGolesDesc);
+                            ordenAplicado="cantidadGolesDesc";
                         }
                         else
                         {
-                            personas.sort(compararPorPublicado);
-                            ordenAplicado="publicadoAsc";
+                            personas.sort(compararPorCantidadGoles);
+                            ordenAplicado="cantidadGolesAsc";
                         }
                         dibujarTabla();
                         break;
                     }                    
-                    case "Enemigo":
+                    case "Titulo":
                     {
-                        if (ordenAplicado == "enemigoAsc")
+                        if (ordenAplicado == "tituloAsc")
                         {
-                            personas.sort(compararPorEnemigoDesc);
-                            ordenAplicado="enemigoDesc";
+                            personas.sort(compararPorTituloDesc);
+                            ordenAplicado="tituloDesc";
                         }
                         else
                         {
-                            personas.sort(compararPorEnemigo);
-                            ordenAplicado="enemigoAsc";
+                            personas.sort(compararPorTitulo);
+                            ordenAplicado="tituloAsc";
                         }
                         dibujarTabla();
                         break;
                     }                    
-                    case "Robos":
+                    case "Facultad":
                     {
-                        if (ordenAplicado == "robosAsc")
+                        if (ordenAplicado == "facultadAsc")
                         {
-                            personas.sort(compararPorRobosDesc);
-                            ordenAplicado="robosDesc";
+                            personas.sort(compararPorFacultadDesc);
+                            ordenAplicado="facultadDesc";
                         }
                         else
                         {
-                            personas.sort(compararPorRobos);
-                            ordenAplicado="robosAsc";
+                            personas.sort(compararPorFacultad);
+                            ordenAplicado="facultadAsc";
                         }
                         dibujarTabla();
                         break;
                     }                    
-                    case "Asesinatos":
+                    case "Año de Graduación":
                     {
-                        if (ordenAplicado == "asesinatosAsc")
+                        if (ordenAplicado == "anioGraduacionAsc")
                         {
-                            personas.sort(compararPorAsesinatosDesc);
-                            ordenAplicado="asesinatosDesc";
+                            personas.sort(compararPorAnioGraduacionDesc);
+                            ordenAplicado="anioGraduacionDesc";
                         }
                         else
                         {
-                            personas.sort(compararPorAsesinatos);
-                            ordenAplicado="asesinatosAsc";
+                            personas.sort(compararPorAnioGraduacion);
+                            ordenAplicado="anioGraduacionAsc";
                         }
                         dibujarTabla();
                         break;
@@ -867,128 +866,128 @@
         return a.edad - b.edad;
         }
 
-        function compararPorAlterEgo(a, b) 
+        function compararPorEquipo(a, b) 
         {            
-            if(a instanceof Villano && b instanceof Villano)
+            if(a instanceof Profesional && b instanceof Profesional)
             {
                 ret = 0;
             }
-            else if (a instanceof Villano)
+            else if (a instanceof Profesional)
             {
                 ret = 1
             }
-            else if (b instanceof Villano)
+            else if (b instanceof Profesional)
             {
                 ret = -1;
             }
             else
             {
-                ret = a.alterEgo.localeCompare(b.alterEgo);
+                ret = a.equipo.localeCompare(b.equipo);
             }            
             return ret;
         }
 
-        function compararPorCiudad(a, b) 
+        function compararPorPosicion(a, b) 
         {
-            if(a instanceof Villano && b instanceof Villano)
+            if(a instanceof Profesional && b instanceof Profesional)
             {
                 ret = 0;
             }
-            else if (a instanceof Villano)
+            else if (a instanceof Profesional)
             {
                 ret = 1
             }
-            else if (b instanceof Villano)
+            else if (b instanceof Profesional)
             {
                 ret = -1;
             }
             else
             {
-                ret = a.ciudad.localeCompare(b.ciudad);
+                ret = a.posicion.localeCompare(b.posicion);
             }            
             return ret;
         }
 
-        function compararPorPublicado(a, b) 
+        function compararPorCantidadGoles(a, b) 
         {
-            if(a instanceof Villano && b instanceof Villano)
+            if(a instanceof Profesional && b instanceof Profesional)
             {
                 ret = 0;
             }
-            else if (a instanceof Villano)
+            else if (a instanceof Profesional)
             {
                 ret = 1
             }
-            else if (b instanceof Villano)
+            else if (b instanceof Profesional)
             {
                 ret = -1;
             }
             else
             {
-                ret = a.publicado-b.publicado;
+                ret = a.cantidadGoles-b.cantidadGoles;
             }  
             return ret;          
         }
 
-        function compararPorEnemigo(a, b) 
+        function compararPorTitulo(a, b) 
         {
-            if(a instanceof Heroe && b instanceof Heroe)
+            if(a instanceof Futbolista && b instanceof Futbolista)
             {
                 ret = 0;
             }
-            else if (a instanceof Heroe)
+            else if (a instanceof Futbolista)
             {
                 ret = 1
             }
-            else if (b instanceof Heroe)
+            else if (b instanceof Futbolista)
             {
                 ret = -1;
             }
             else
             {
-                ret = a.enemigo.localeCompare(b.enemigo);
+                ret = a.titulo.localeCompare(b.titulo);
             }   
             return ret; 
         }
 
-        function compararPorRobos(a, b) 
+        function compararPorFacultad(a, b) 
         {
-            if(a instanceof Heroe && b instanceof Heroe)
+            if(a instanceof Futbolista && b instanceof Futbolista)
             {
                 ret = 0;
             }
-            else if (a instanceof Heroe)
+            else if (a instanceof Futbolista)
             {
                 ret = 1
             }
-            else if (b instanceof Heroe)
+            else if (b instanceof Futbolista)
             {
                 ret = -1;
             }
             else
             {
-                ret = a.robos - b.robos;
+                ret = a.facultad.localeCompare(b.facultad);
             } 
             return ret;
         }
 
-        function compararPorAsesinatos(a, b) 
+        function compararPorAnioGraduacion(a, b) 
         {
-            if(a instanceof Heroe && b instanceof Heroe)
+            if(a instanceof Futbolista && b instanceof Futbolista)
             {
                 ret = 0;
             }
-            else if (a instanceof Heroe)
+            else if (a instanceof Futbolista)
             {
                 ret = 1
             }
-            else if (b instanceof Heroe)
+            else if (b instanceof Futbolista)
             {
                 ret = -1;
             }
             else
             {
-                ret = a.asesinatos - b.asesinatos;
+                ret = a.anioGraduacion - b.anioGraduacion;
             }      
             return ret;
         }
@@ -1009,150 +1008,150 @@
         return a.edad - b.edad;
         }
 
-        function compararPorAlterEgoDesc(b, a)
+        function compararPorEquipoDesc(b, a)
         {            
-            if(a instanceof Villano && b instanceof Villano)
+            if(a instanceof Profesional && b instanceof Profesional)
             {
                 ret = 0;
             }
-            else if (a instanceof Villano)
+            else if (a instanceof Profesional)
             {
                 ret = -1
             }
-            else if (b instanceof Villano)
+            else if (b instanceof Profesional)
             {
                 ret = 1;
             }
             else
             {
-                ret = a.alterEgo.localeCompare(b.alterEgo);
+                ret = a.equipo.localeCompare(b.equipo);
             }            
             return ret;
         }
 
-        function compararPorCiudadDesc(b, a)
+        function compararPorPosicionDesc(b, a)
         {
-            if(a instanceof Villano && b instanceof Villano)
+            if(a instanceof Profesional && b instanceof Profesional)
             {
                 ret = 0;
             }
-            else if (a instanceof Villano)
+            else if (a instanceof Profesional)
             {
                 ret = -1
             }
-            else if (b instanceof Villano)
+            else if (b instanceof Profesional)
             {
                 ret = 1;
             }
             else
             {
-                ret = a.ciudad.localeCompare(b.ciudad);
+                ret = a.posicion.localeCompare(b.posicion);
             }            
             return ret;
         }
 
-        function compararPorPublicadoDesc(b, a)
+        function compararPorCantidadGolesDesc(b, a)
         {
-            if(a instanceof Villano && b instanceof Villano)
+            if(a instanceof Profesional && b instanceof Profesional)
             {
                 ret = 0;
             }
-            else if (a instanceof Villano)
+            else if (a instanceof Profesional)
             {
                 ret = -1
             }
-            else if (b instanceof Villano)
+            else if (b instanceof Profesional)
             {
                 ret = 1;
             }
             else
             {
-                ret = a.publicado-b.publicado;
+                ret = a.cantidadGoles-b.cantidadGoles;
             }  
             return ret;          
         }
 
-        function compararPorEnemigoDesc(b, a)
+        function compararPorTituloDesc(b, a)
         {
-            if(a instanceof Heroe && b instanceof Heroe)
+            if(a instanceof Futbolista && b instanceof Futbolista)
             {
                 ret = 0;
             }
-            else if (a instanceof Heroe)
+            else if (a instanceof Futbolista)
             {
                 ret = -1
             }
-            else if (b instanceof Heroe)
+            else if (b instanceof Futbolista)
             {
                 ret = 1;
             }
             else
             {
-                ret = a.enemigo.localeCompare(b.enemigo);
+                ret = a.titulo.localeCompare(b.titulo);
             }   
             return ret; 
         }
 
-        function compararPorRobosDesc(b, a)
+        function compararPorFacultadDesc(b, a)
         {
-            if(a instanceof Heroe && b instanceof Heroe)
+            if(a instanceof Futbolista && b instanceof Futbolista)
             {
                 ret = 0;
             }
-            else if (a instanceof Heroe)
+            else if (a instanceof Futbolista)
             {
                 ret = -1
             }
-            else if (b instanceof Heroe)
+            else if (b instanceof Futbolista)
             {
                 ret = 1;
             }
             else
             {
-                ret = a.robos - b.robos;
+                ret = a.facultad.localeCompare(b.facultad);
             } 
             return ret;
         }
 
-        function compararPorAsesinatosDesc(b, a)
+        function compararPorAnioGraduacionDesc(b, a)
         {
-            if(a instanceof Heroe && b instanceof Heroe)
+            if(a instanceof Futbolista && b instanceof Futbolista)
             {
                 ret = 0;
             }
-            else if (a instanceof Heroe)
+            else if (a instanceof Futbolista)
             {
                 ret = -1
             }
-            else if (b instanceof Heroe)
+            else if (b instanceof Futbolista)
             {
                 ret = 1;
             }
             else
             {
-                ret = a.asesinatos - b.asesinatos;
+                ret = a.anioGraduacion - b.anioGraduacion;
             }      
             return ret;
         }
 
       // Siimulación del resultado de un consulta http en json.
         const DB = 
-        '[{"id":1, "nombre":"Clark", "apellido":"Kent", "edad":45, "alterego":"Superman", "ciudad":"Metropolis","publicado":2002},\
-        {"id":2, "nombre":"Bruce", "apellido":"Wayne", "edad":35, "alterego":"Batman", "ciudad":"Gotica","publicado":20012},\
-        {"id":3, "nombre":"Bart", "apellido":"Alen", "edad":30, "alterego":"Flash", "ciudad":"Central","publicado":2017},\
-        {"id":4, "nombre":"Lex", "apellido":"Luthor", "edad":18, "enemigo":"Superman", "robos":500,"asesinatos":7},\
-        {"id":5, "nombre":"Harvey", "apellido":"Dent", "edad":20, "enemigo":"Batman", "robos":750,"asesinatos":2},\
-        {"id":666, "nombre":"Celina", "apellido":"kyle", "edad":23, "enemigo":"Batman", "robos":25,"asesinatos":1}]'
+        '[{"id":1, "nombre":"Marcelo", "apellido":"Luque", "edad":45, "titulo":"Ingeniero", "facultad":"UTN", "añoGraduacion":2002},\
+        {"id":2, "nombre":"Ramiro", "apellido":"Escobar", "edad":35, "titulo":"Medico", "facultad":"UBA", "añoGraduacion":20012},\
+        {"id":3, "nombre":"Facundo", "apellido":"Cairo", "edad":30, "titulo":"Abogado", "facultad":"UCA", "añoGraduacion":2017},\
+        {"id":4, "nombre":"Fernando", "apellido":"Nieto", "edad":18, "equipo":"Independiente", "posicion":"Delantero", "cantidadGoles":7}\
+        ,{"id":5, "nombre":"Manuel", "apellido":"Loza", "edad":20, "equipo":"Racing", "posicion":"Volante", "cantidadGoles":2},\
+        {"id":6, "nombre":"Nicolas", "apellido":"Serrano", "edad":23, "equipo":"Boca", "posicion":"Arquero", "cantidadGoles":0}]'
 
         // convierto en un array de objetos
         var data = JSON.parse(DB);
 
         // con la función map voy creando los objetos según corresponda
         var personas = data.map(obj => {
-            if ('ciudad' in obj) {
-                return new Heroe(obj.id, obj.nombre, obj.apellido, obj.edad, obj.alterego, obj.ciudad, obj.publicado);
+            if ('equipo' in obj) {
+                return new Futbolista(obj.id, obj.nombre, obj.apellido, obj.edad, obj.equipo, obj.posicion, obj.cantidadGoles);
             } else {
-                return new Villano(obj.id, obj.nombre, obj.apellido, obj.edad, obj.enemigo, obj.robos, obj.asesinatos);
+                return new Profesional(obj.id, obj.nombre, obj.apellido, obj.edad, obj.titulo, obj.facultad, obj.añoGraduacion);
             }
         });
 
@@ -1162,29 +1161,29 @@
         {   
             var elementosADibujar = filtro.value;
 
-            if(elementosADibujar=="Heroes")
+            if(elementosADibujar=="Futbolistas")
             {
-                heroes = personas.filter((persona)=>
+                futbolistas = personas.filter((persona)=>
                 {
-                    return persona instanceof Heroe;
+                    return persona instanceof Futbolista;
                 });
-                acumulado = heroes.reduce((acumulador, persona) => 
+                acumulado = futbolistas.reduce((acumulador, persona) => 
                 {
                     return acumulador + persona.edad;
                 },0);
-                promedioEdades.value=(acumulado/heroes.length).toFixed(1);
+                promedioEdades.value=(acumulado/futbolistas.length).toFixed(1);
             }
-            else if(elementosADibujar=="Villanos")
+            else if(elementosADibujar=="Profesionals")
             {
-                villanos = personas.filter((persona)=>
+                profesionals = personas.filter((persona)=>
                 {
-                    return persona instanceof Villano;
+                    return persona instanceof Profesional;
                 });
-                acumulado = villanos.reduce((acumulador, persona) => 
+                acumulado = profesionals.reduce((acumulador, persona) => 
                 {
                     return acumulador + persona.edad;
                 },0);
-                promedioEdades.value=(acumulado/villanos.length).toFixed(1);
+                promedioEdades.value=(acumulado/profesionals.length).toFixed(1);
             }
             else
             {
@@ -1200,63 +1199,63 @@
         {
             var elementosADibujar = event.target.value;
             dibujarTabla(elementosADibujar);
-            if(filtro.value=="Heroes")
+            if(filtro.value=="Futbolistas")
             {
                 //activo y habilito los que van
-                chkalterEgo.checked=true;
-                chkciudad.checked=true;
-                chkpublicado.checked=true;
+                chkequipo.checked=true;
+                chkposicion.checked=true;
+                chkcantidadGoles.checked=true;
 
-                chkalterEgo.disabled=false;
-                chkciudad.disabled=false;
-                chkpublicado.disabled=false;
+                chkequipo.disabled=false;
+                chkposicion.disabled=false;
+                chkcantidadGoles.disabled=false;
 
                 //desctivo y deshabilito los que no
-                chkenemigo.checked=false;
-                chkrobos.checked=false;
-                chkasesinatos.checked=false;
+                chktitulo.checked=false;
+                chkfacultad.checked=false;
+                chkanioGraduacion.checked=false;
 
-                chkenemigo.disabled=true;
-                chkrobos.disabled=true;
-                chkasesinatos.disabled=true;
+                chktitulo.disabled=true;
+                chkfacultad.disabled=true;
+                chkanioGraduacion.disabled=true;
             }
-            else if (filtro.value=="Villanos")
+            else if (filtro.value=="Profesionals")
             {
                 //activo y habilito los que van
-                chkenemigo.checked=true;
-                chkrobos.checked=true;
-                chkasesinatos.checked=true;
+                chktitulo.checked=true;
+                chkfacultad.checked=true;
+                chkanioGraduacion.checked=true;
 
-                chkenemigo.disabled=false;
-                chkrobos.disabled=false;
-                chkasesinatos.disabled=false;
+                chktitulo.disabled=false;
+                chkfacultad.disabled=false;
+                chkanioGraduacion.disabled=false;
 
                 //desctivo y deshabilito los que no
-                chkalterEgo.checked=false;
-                chkciudad.checked=false;
-                chkpublicado.checked=false;
+                chkequipo.checked=false;
+                chkposicion.checked=false;
+                chkcantidadGoles.checked=false;
 
-                chkalterEgo.disabled=true;
-                chkciudad.disabled=true;
-                chkpublicado.disabled=true;
+                chkequipo.disabled=true;
+                chkposicion.disabled=true;
+                chkcantidadGoles.disabled=true;
             }
             else
             {
-                chkalterEgo.checked=true;
-                chkciudad.checked=true;
-                chkpublicado.checked=true;
+                chkequipo.checked=true;
+                chkposicion.checked=true;
+                chkcantidadGoles.checked=true;
 
-                chkenemigo.checked=true;
-                chkrobos.checked=true;
-                chkasesinatos.checked=true;
+                chktitulo.checked=true;
+                chkfacultad.checked=true;
+                chkanioGraduacion.checked=true;
 
-                chkalterEgo.disabled=false;
-                chkciudad.disabled=false;
-                chkpublicado.disabled=false;
+                chkequipo.disabled=false;
+                chkposicion.disabled=false;
+                chkcantidadGoles.disabled=false;
 
-                chkenemigo.disabled=false;
-                chkrobos.disabled=false;
-                chkasesinatos.disabled=false;
+                chktitulo.disabled=false;
+                chkfacultad.disabled=false;
+                chkanioGraduacion.disabled=false;
             }
             actualizarColumnas();
         })   
@@ -1271,17 +1270,17 @@
 
         selectTipo.addEventListener("change", (event)=>
         {
-            if (selectTipo.value=="Heroe")
+            if (selectTipo.value=="Futbolista")
             {
-                lblAtr5.textContent="Alterego";
-                lblAtr6.textContent="Ciudad";
+                lblAtr5.textContent="Equipo";
+                lblAtr6.textContent="Posicion";
                 lblAtr7.textContent="Publicación";
             }
             else
             {
-                lblAtr5.textContent="Enemigo";
-                lblAtr6.textContent="Robos";
-                lblAtr7.textContent="Asesinatos";
+                lblAtr5.textContent="Titulo";
+                lblAtr6.textContent="Facultad";
+                lblAtr7.textContent="AnioGraduacion";
             }
         });
 
@@ -1316,16 +1315,16 @@
                 }
             }
 
-            if (txtnombre!="" && txtapellido!="" && txtedad!="" && !isNaN(txtedad))
+            if (txtnombre!="" && txtapellido!="" && txtedad!="" && !isNaN(txtedad) && txtedad>15)
             {
-                if (selectTipo.value=="Heroe")
+                if (selectTipo.value=="Futbolista")
                 {
-                    if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>1940)
+                    if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>=0)
                     {
                         if(existe==false)
                         {
-                            nuevoHeroe = new Heroe(ultimoID+1,txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
-                            personas.push(nuevoHeroe);
+                            nuevoFutbolista = new Futbolista(ultimoID+1,txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
+                            personas.push(nuevoFutbolista);
                             ultimoID++;
                         }
                         else
@@ -1333,9 +1332,9 @@
                             personas[existe].nombre=document.getElementById("txtnombre").value;
                             personas[existe].apellido=document.getElementById("txtapellido").value;
                             personas[existe].edad=document.getElementById("txtedad").value;
-                            personas[existe].alterEgo=document.getElementById("txtAtr5").value;
-                            personas[existe].ciudad=document.getElementById("txtAtr6").value;
-                            personas[existe].publicado=document.getElementById("txtAtr7").value;
+                            personas[existe].equipo=document.getElementById("txtAtr5").value;
+                            personas[existe].posicion=document.getElementById("txtAtr6").value;
+                            personas[existe].cantidadGoles=document.getElementById("txtAtr7").value;
                         }
                         
                     }
@@ -1345,12 +1344,12 @@
                 }
                 else 
                 {
-                    if (txtAtr5!="" && !isNaN(txtAtr6) && txtAtr6>0 && !isNaN(txtAtr7) && txtAtr7>0)
+                    if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>1950)
                     {
                         if(existe==false)
                         {
-                            nuevoVillano = new Villano(ultimoID+1,txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
-                            personas.push(nuevoVillano);
+                            nuevoProfesional = new Profesional(ultimoID+1,txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
+                            personas.push(nuevoProfesional);
                             ultimoID++;
                         }
                         else
@@ -1358,11 +1357,10 @@
                             personas[existe].nombre=document.getElementById("txtnombre").value;
                             personas[existe].apellido=document.getElementById("txtapellido").value;
                             personas[existe].edad=document.getElementById("txtedad").value;
-                            personas[existe].enemigo=document.getElementById("txtAtr5").value;
-                            personas[existe].robos=document.getElementById("txtAtr6").value;
-                            personas[existe].asesinatos=document.getElementById("txtAtr7").value;
-                        }
-                        
+                            personas[existe].titulo=document.getElementById("txtAtr5").value;
+                            personas[existe].facultad=document.getElementById("txtAtr6").value;
+                            personas[existe].anioGraduacion=document.getElementById("txtAtr7").value;
+                        }                        
                     }
                     else{
                         error=true;
