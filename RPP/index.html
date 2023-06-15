@@ -1321,7 +1321,7 @@ body {
                 {
                     if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>=0)
                     {
-                        if(existe==false)
+                        if(existe===false)
                         {
                             nuevoFutbolista = new Futbolista(ultimoID+1,txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
                             personas.push(nuevoFutbolista);
@@ -1346,7 +1346,7 @@ body {
                 {
                     if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>1950)
                     {
-                        if(existe==false)
+                        if(existe===false)
                         {
                             nuevoProfesional = new Profesional(ultimoID+1,txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
                             personas.push(nuevoProfesional);
