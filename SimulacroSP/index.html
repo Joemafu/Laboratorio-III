@@ -162,13 +162,47 @@ body {
         display: none;
     }   
 
-    #spinner {
+    /* SPINNER VIEJO ♥*/
+    /* #spinner {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 9999;
         display: none;
+    } */
+
+    /* SPINNER NUEVO  */
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999; 
+    }
+
+    /* SPINNER NUEVO  */
+    .spinner {
+        width: 50px;
+        height: 50px;
+        background-image: url(
+
+        'https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-18.jpg' 
+
+        );
+        background-size: cover;
+        animation: spin 1s infinite linear;
+    }
+
+    /* SPINNER NUEVO  */
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
     </style>
@@ -272,37 +306,41 @@ body {
         
         <div class="divABMInput">
             <label for="selectTipo" id="lbltipo">Tipo:</label>
-            <select name="tipo" id="selectTipo">
-                <option value="Futbolista">Futbolista</option>
+            <select name="tipo" id="selectTipo" >
+                <option value="Futbolista" selected>Futbolista</option>
                 <option value="Profesional">Profesional</option>
             </select>
         </div>
         
         <div class="divABMInput">
-            <label for="txtAtr5" id="lblAtr5">Equipo:</label>
+            <label for="txtAtr5" id="lblAtr5">:</label>
             <input type="text" id="txtAtr5" name="txtAtr5" value="">
         </div>
         
         <div class="divABMInput">
-            <label for="txtAtr6" id="lblAtr6">Posicion:</label>
+            <label for="txtAtr6" id="lblAtr6">:</label>
             <input type="text" id="txtAtr6" name="txtAtr6" value="">
         </div>
         
         <div class="divABMInput">
-            <label for="txtAtr7" id="lblAtr7">CantidadGoles:</label>
+            <label for="txtAtr7" id="lblAtr7">:</label>
             <input type="text" id="txtAtr7" name="txtAtr7" value="">
         </div>
         
         <button class="boton" id="btnAceptar">Aceptar</button>
-        <!-- <button id="btnEliminar">Eliminar</button> -->
         <button class="boton" id="btnCancelar">Cancelar</button>
     </div>
 
-    <div id="spinner">
+    <!-- SPINNER VIEJO ♥ -->
+    <!-- <div id="spinner">
         <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/b6e0b072897469.5bf6e79950d23.gif" alt="Loading Spinner">
+    </div> -->
+
+    <!-- SPINNER NUEVO -->
+    <div id="overlay">
+        <div class="spinner"></div>
     </div>
       
-    
     <!-- ---------------- JAVA SCRIPT ---------------- -->
 
     <script>
@@ -317,7 +355,7 @@ body {
                 this.id = id;
                 this.nombre = nombre;
                 this.apellido = apellido;
-                this.edad = edad;
+                this.edad = +edad;
             }
 
             toString() {
@@ -377,7 +415,7 @@ body {
 
         //Txtbox para el promedio y su boton calcular
         var promedioEdades = document.getElementById("edadPromedio");
-        var botonCalcular = document.getElementById("calcularPromedio");
+        var btnCalcular = document.getElementById("calcularPromedio");
 
         //CheckBoxes
         var chkid = document.getElementById("ID");
@@ -417,7 +455,6 @@ body {
         
         //Aceptar y Cancelar Formulario ABM
         var btnAceptar = document.getElementById("btnAceptar");
-        //var btnEliminar = document.getElementById("btnEliminar");
         var btnCancelar = document.getElementById("btnCancelar");
 
         //Spinner de carga
@@ -469,32 +506,37 @@ body {
 
         xhr.send();
 
-        // var database = 
-        // '[{"id":1, "nombre":"Marcelo", "apellido":"Luque", "edad":45, "titulo":"Ingeniero", "facultad":"UTN", "añoGraduacion":2002},\
-        // {"id":2, "nombre":"Ramiro", "apellido":"Escobar", "edad":35, "titulo":"Medico", "facultad":"UBA", "añoGraduacion":20012},\
-        // {"id":3, "nombre":"Facundo", "apellido":"Cairo", "edad":30, "titulo":"Abogado", "facultad":"UCA", "añoGraduacion":2017},\
-        // {"id":4, "nombre":"Fernando", "apellido":"Nieto", "edad":18, "equipo":"Independiente", "posicion":"Delantero", "cantidadGoles":7}\
-        // ,{"id":5, "nombre":"Manuel", "apellido":"Loza", "edad":20, "equipo":"Racing", "posicion":"Volante", "cantidadGoles":2},\
-        // {"id":6, "nombre":"Nicolas", "apellido":"Serrano", "edad":23, "equipo":"Boca", "posicion":"Arquero", "cantidadGoles":0}]'
-
-        // convierto en un array de objetos
-
-        function entraSpinner()
-        {
-            // Bloqueo con el spinner y oscurezco el fondo del body
-            spinner.style.display = "block";
-            document.body.style.backgroundColor = "rgb(0, 0, 0)";   
+        // SPINNER NUEVO
+        function entraSpinner() {
+        var overlay = document.getElementById("overlay");
+        overlay.style.display = "flex";
         }
 
-        function saleSpinner()
-        {
-            // Desaparezco el spinner y restablezco el color del body
-            spinner.style.display = "none";
-            document.body.style.backgroundColor = "rgb(184, 200, 252)";   
+        // SPINNER NUEVO
+        function saleSpinner() {
+        var overlay = document.getElementById("overlay");
+        overlay.style.display = "none";
         }
+              
+        //  SPINNER VIEJO ♥
+
+        // function entraSpinner()
+        // {
+        //     // Bloqueo con el spinner y oscurezco el fondo del body
+        //     spinner.style.display = "block";
+        //     document.body.style.backgroundColor = "rgb(0, 0, 0)";   
+        // }
+
+        // function saleSpinner()
+        // {
+        //     // Desaparezco el spinner y restablezco el color del body
+        //     spinner.style.display = "none";
+        //     document.body.style.backgroundColor = "rgb(184, 200, 252)";   
+        // }
 
         function levantarDatosFormulario()
         {
+            txtid = document.getElementById("txtid").value;
             txtnombre = document.getElementById("txtnombre").value;
             txtapellido = document.getElementById("txtapellido").value;
             txtedad = document.getElementById("txtedad").value;
@@ -502,6 +544,16 @@ body {
             txtAtr5 = document.getElementById("txtAtr5").value;
             txtAtr6 = document.getElementById("txtAtr6").value;
             txtAtr7 = document.getElementById("txtAtr7").value;
+        }
+
+        function deshabilitarCampos()
+        {
+            document.getElementById("txtnombre").disabled = document.getElementById("tituloABM").innerText=="Baja";
+            document.getElementById("txtapellido").disabled = document.getElementById("tituloABM").innerText=="Baja";
+            document.getElementById("txtedad").disabled = document.getElementById("tituloABM").innerText=="Baja";
+            document.getElementById("txtAtr5").disabled = document.getElementById("tituloABM").innerText=="Baja";
+            document.getElementById("txtAtr6").disabled = document.getElementById("tituloABM").innerText=="Baja";
+            document.getElementById("txtAtr7").disabled = document.getElementById("tituloABM").innerText=="Baja";
         }
 
         function blanquearFormulario()
@@ -517,13 +569,15 @@ body {
 
         function alternarVista()
         {
+
             if (mostrarTabla)
             {
+                actualizarLabels();
+                deshabilitarCampos();
                 mostrarTabla=false;
                 divTabla.style.display="none";
                 divABM.style.display="inline-block";
                 document.getElementById("txtid").value="A/D";
-                actualizarLabels();
             }else
             {
                 mostrarTabla=true;
@@ -787,15 +841,16 @@ body {
         }
 
         function baja(id)
-        {
+        {   
+            actualizarLabels();
             document.getElementById("tituloABM").innerText="Baja";
             alternarVista();
-
             completarABM(id);
         }
 
         function modificacion(id)
         {
+            actualizarLabels();
             document.getElementById("tituloABM").innerText="Modificación";
             alternarVista();
             completarABM(id);
@@ -804,8 +859,8 @@ body {
         function completarABM (idPersona)
         {
             var personaAEditar;
-            selectTipo.disabled=true;
             actualizarLabels();
+            selectTipo.disabled=true;
             personaAEditar = personas.reduce((personaAEditar, persona)=>
             {
                 if(persona.id==idPersona)
@@ -1286,13 +1341,14 @@ body {
 
         function actualizarLabels()
         {
+            
             if (selectTipo.value=="Futbolista")
             {
                 lblAtr5.textContent="Equipo";
                 lblAtr6.textContent="Posición";
                 lblAtr7.textContent="Cantidad de Goles";
             }
-            else
+            else if (selectTipo.value=="Profesional")
             {
                 lblAtr5.textContent="Título";
                 lblAtr6.textContent="Facultad";
@@ -1300,45 +1356,35 @@ body {
             }
         }
 
-        //dibujarTabla();
-
-        botonCalcular.addEventListener("click", (event)=>
+        btnCalcular.addEventListener("click", (event)=>
         {   
             var elementosADibujar = filtro.value;
-            acumulador = 0;
+            var acumulador = 0;
 
             if(elementosADibujar=="Futbolistas")
             {
-                futbolistas = personas.filter((persona)=>
+                personasFiltradas = personas.filter((persona)=>
                 {
                     return persona instanceof Futbolista;
                 });
-                acumulador = futbolistas.reduce((acumulador, persona) => 
-                {
-                    return acumulador + persona.edad;
-                },0);
-                promedioEdades.value=(acumulador/futbolistas.length).toFixed(1);
             }
             else if(elementosADibujar=="Profesionales")
             {
-                profesionales = personas.filter((persona)=>
+                personasFiltradas = personas.filter((persona)=>
                 {
                     return persona instanceof Profesional;
                 });
-                acumulador = profesionales.reduce((acumulador, persona) => 
-                {
-                    return acumulador + persona.edad;
-                },0);
-                promedioEdades.value=(acumulador/profesionales.length).toFixed(1);
             }
             else
             {
-                acumulador = personas.reduce((acumulador, persona) => 
-                {
-                    return acumulador + persona.edad;
-                },0);
-                promedioEdades.value=(acumulador/personas.length).toFixed(1);
+                personasFiltradas = personas;
             }
+            acumulador = personasFiltradas.reduce((acumulador, persona) => 
+            {
+                return acumulador + persona.edad;
+            },0);
+            
+            promedioEdades.value=(acumulador/personasFiltradas.length).toFixed(1);
         });
 
         filtro.addEventListener("change", (event) =>
@@ -1409,6 +1455,7 @@ body {
         btnAgregar.addEventListener("click", (event)=>
         {
             alta();
+            actualizarLabels();
         });
 
         selectTipo.addEventListener("change", (event)=>
@@ -1423,27 +1470,23 @@ body {
             refrescarEventListener();
         });
 
-        // btnEliminar.addEventListener("click",(event)=>
-        // {
-        //     
-        // });
-
         btnAceptar.addEventListener("click",(event)=>
         {
             var error = false;
             if(document.getElementById("tituloABM").innerText=="Baja")
             {
-                personas = personas.filter((persona) => persona.id != document.getElementById("txtid").value);
-
-                alternarVista();
-                blanquearFormulario();
-                dibujarTabla();
+                levantarDatosFormulario();                
+                var cuerpo;
+                var objetoID = {
+                    id: txtid
+                };
+                cuerpo = JSON.stringify(objetoID);   
+                enviarDelete(cuerpo, "Futbolista"); 
             }
             else if (document.getElementById("tituloABM").innerText=="Alta")
             {
                 levantarDatosFormulario();
                 var cuerpo;
-                var id;
 
                 if (txtnombre!="" && txtapellido!="" && txtedad!="" && !isNaN(txtedad) && txtedad>15)
                 {
@@ -1460,7 +1503,7 @@ body {
                                 cantidadGoles: txtAtr7
                             };
                             cuerpo = JSON.stringify(nuevoFutbolista);   
-                            id = enviarPut(cuerpo, "Futbolista");                            
+                            enviarPut(cuerpo, "Futbolista");                            
                         }
                         else{
                             error=true;
@@ -1479,7 +1522,64 @@ body {
                                 anoGraduacion: txtAtr7
                             };
                             cuerpo = JSON.stringify(nuevoProfesional);   
-                            id = enviarPut(cuerpo, "Profesional");                
+                            enviarPut(cuerpo, "Profesional");                
+                        }
+                        else{
+                            error=true;
+                        }
+                    }
+                }
+                else{
+                    error=true;
+                }
+                if(error)
+                {
+                    alert("Error, revise los datos e intente nuevamente.");
+                }
+            }
+            else if (document.getElementById("tituloABM").innerText=="Modificación")
+            {
+                levantarDatosFormulario();
+                var cuerpo;
+
+                if (txtnombre!="" && txtapellido!="" && txtedad!="" && !isNaN(txtedad) && txtedad>15)
+                {
+                    if (selectTipo.value=="Futbolista")
+                    {
+                        if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>=0)
+                        {
+                            var nuevoFutbolista = {
+                                id: txtid,
+                                nombre: txtnombre,
+                                apellido: txtapellido,
+                                edad: txtedad,
+                                equipo: txtAtr5,
+                                posicion: txtAtr6,
+                                cantidadGoles: txtAtr7
+                            };
+                            cuerpo = JSON.stringify(nuevoFutbolista);   
+                            enviarPost(cuerpo, "Futbolista");                            
+                        }
+                        else{
+                            error=true;
+                        }
+                    }
+                    else 
+                    {
+                        if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>1950)
+                        {
+                            var nuevoProfesional = {
+                                id: txtid,
+                                nombre: txtnombre,
+                                apellido: txtapellido,
+                                edad: txtedad,
+                                titulo: txtAtr5,
+                                facultad: txtAtr6,
+                                anoGraduacion: txtAtr7
+                                
+                            };
+                            cuerpo = JSON.stringify(nuevoProfesional);   
+                            enviarPost(cuerpo, "Profesional");                
                         }
                         else{
                             error=true;
@@ -1496,44 +1596,162 @@ body {
             }
         });
 
-        async function enviarPut(cuerpo, clase)
+        function enviarPut(cuerpo, clase)
         {
             entraSpinner();
-            try {
-                // Realizar la solicitud PUT utilizando fetch y esperar la respuesta
-                var response = await fetch("PersonasEmpleadosClientes.php", {
+            var promesa = fetch("PersonasEmpleadosClientes.php", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 }, 
                 body: cuerpo
-                });
-                // Esperar la respuesta JSON del servidor
-                var data = await response.json();
+            })
+            .then(response => response.json())
+            .then(data => {
+                var nuevaPersona;
 
-                if(clase=="Futbolista")
-                {
-                    nuevaPersona = new Futbolista(data["id"],txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
-                }
-                else
-                {
-                    nuevaPersona = new Profesional(data["id"],txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
+                if (clase === "Futbolista") {
+                    nuevaPersona = new Futbolista(data["id"], txtnombre, txtapellido, txtedad, txtAtr5, txtAtr6, txtAtr7);
+                } else {
+                    nuevaPersona = new Profesional(data["id"], txtnombre, txtapellido, txtedad, txtAtr5, txtAtr6, txtAtr7);
                 }
                 personas.push(nuevaPersona);
+                
                 blanquearFormulario();
                 alternarVista();
                 dibujarTabla();
                 saleSpinner();
-
-            } catch (error) {
-                alert("No se pudo generar el alta: ",error);
-            }
+            })
+            .catch(error => {
+                alert("No se pudo generar el alta: " + error);
+                
+                blanquearFormulario();
+                alternarVista();
+                dibujarTabla();
+                saleSpinner();
+            });
         }
 
+        async function enviarPost(cuerpo, clase)
+        {
+            entraSpinner();
+            try 
+            {
+                var respuesta = await fetch("PersonasEmpleadosClientes.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }, 
+                    body: cuerpo
+                });
+            } catch (error) {
+                alert("No se pudo realizar la modificación: ",error);
+            }
+            if (respuesta.status==200)
+            {
+                modificarValidado();
+            }
+            else
+            {
+                alert("No se pudo realizar la modificación.");
+            }
+            console.log("Respuesta:", await respuesta.text(), "con código", respuesta.status);;
+            saleSpinner();
+        }
 
+        async function enviarDelete(cuerpo)
+        {
+            entraSpinner();
+            try 
+            {
+                var respuesta = await fetch("PersonasEmpleadosClientes.php", {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }, 
+                    body: cuerpo
+                });
+            } catch (error) {
+                alert("No se pudo realizar la eliminación: ",error);
+            }
+            if (respuesta.status==200)
+            {
+                personas = personas.filter((persona) => persona.id != txtid);
+            }
+            else
+            {
+                alert("No se pudo realizar la modificación.");
+            }
+            console.log("Respuesta:", await respuesta.text(), "con código", respuesta.status);;
+            blanquearFormulario();
+            alternarVista();
+            dibujarTabla();
+            saleSpinner();
+        }
 
+        function modificarValidado()
+        {
+            var error = false;
+            var id = document.getElementById("txtid").value;
+            var pos = -1;
 
-
+            for(i=0;i<personas.length;i++)
+            {
+                if (personas[i].id==id)
+                {
+                    pos=i;
+                    break;
+                }
+            }
+            
+            if (txtnombre!="" && txtapellido!="" && txtedad!="" && !isNaN(txtedad) && txtedad>15)
+            {
+                if (selectTipo.value=="Futbolista")
+                {
+                    if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>=0)
+                    {
+                        personas[pos].nombre=document.getElementById("txtnombre").value;
+                        personas[pos].apellido=document.getElementById("txtapellido").value;
+                        personas[pos].edad=document.getElementById("txtedad").value;
+                        personas[pos].equipo=document.getElementById("txtAtr5").value;
+                        personas[pos].posicion=document.getElementById("txtAtr6").value;
+                        personas[pos].cantidadGoles=document.getElementById("txtAtr7").value;
+                    }
+                    else{
+                        error=true;
+                    }
+                }
+                else 
+                {
+                    if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>1950)
+                    {
+                        personas[pos].nombre=document.getElementById("txtnombre").value;
+                        personas[pos].apellido=document.getElementById("txtapellido").value;
+                        personas[pos].edad=document.getElementById("txtedad").value;
+                        personas[pos].titulo=document.getElementById("txtAtr5").value;
+                        personas[pos].facultad=document.getElementById("txtAtr6").value;
+                        personas[pos].anioGraduacion=document.getElementById("txtAtr7").value;               
+                    }
+                    else{
+                        error=true;
+                    }
+                }
+            }
+            else
+            {
+                error = true;
+            }
+            if(error)
+            {
+                alert("Error, revise los datos e intente nuevamente.");
+            }
+            else
+            {
+                blanquearFormulario();
+                alternarVista();
+                dibujarTabla();
+            }
+        }
 
 
 
@@ -1564,91 +1782,8 @@ body {
 
 
 
-            
-        //     else
-        //     {
+
                 
-        //         var error = false;
-        //         var existe = false;
-        //         var idATrabajar = document.getElementById("txtid").value;
-
-        //         for (var i = 0; i < personas.length; i++) 
-        //         {
-        //             if (personas[i].id == idATrabajar) 
-        //             {
-        //                 existe=i;
-        //             }
-        //         }
-
-        //         if (txtnombre!="" && txtapellido!="" && txtedad!="" && !isNaN(txtedad) && txtedad>15)
-        //         {
-        //             if (selectTipo.value=="Futbolista")
-        //             {
-        //                 if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>=0)
-        //                 {
-        //                     if(existe===false)
-        //                     {
-        //                         nuevoFutbolista = new Futbolista(ultimoID+1,txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
-        //                         personas.push(nuevoFutbolista);
-        //                         ultimoID++;
-        //                     }
-        //                     else
-        //                     {
-        //                         personas[existe].nombre=document.getElementById("txtnombre").value;
-        //                         personas[existe].apellido=document.getElementById("txtapellido").value;
-        //                         personas[existe].edad=document.getElementById("txtedad").value;
-        //                         personas[existe].equipo=document.getElementById("txtAtr5").value;
-        //                         personas[existe].posicion=document.getElementById("txtAtr6").value;
-        //                         personas[existe].cantidadGoles=document.getElementById("txtAtr7").value;
-        //                     }
-                            
-        //                 }
-        //                 else{
-        //                     error=true;
-        //                 }
-        //             }
-        //             else 
-        //             {
-        //                 if (txtAtr5!="" && txtAtr6!="" && !isNaN(txtAtr7) && txtAtr7>1950)
-        //                 {
-        //                     if(existe===false)
-        //                     {
-        //                         nuevoProfesional = new Profesional(ultimoID+1,txtnombre,txtapellido,txtedad,txtAtr5,txtAtr6,txtAtr7);
-        //                         personas.push(nuevoProfesional);
-        //                         ultimoID++;
-        //                     }
-        //                     else
-        //                     {
-        //                         personas[existe].nombre=document.getElementById("txtnombre").value;
-        //                         personas[existe].apellido=document.getElementById("txtapellido").value;
-        //                         personas[existe].edad=document.getElementById("txtedad").value;
-        //                         personas[existe].titulo=document.getElementById("txtAtr5").value;
-        //                         personas[existe].facultad=document.getElementById("txtAtr6").value;
-        //                         personas[existe].anioGraduacion=document.getElementById("txtAtr7").value;
-        //                     }                        
-        //                 }
-        //                 else{
-        //                     error=true;
-        //                 }
-        //             }
-        //         }
-        //         else
-        //         {
-        //             error = true;
-        //         }
-        //         if(error)
-        //         {
-        //             alert("Error, revise los datos e intente nuevamente.");
-        //         }
-        //         else
-        //         {
-        //             alternarVista();
-        //             dibujarTabla();
-        //             blanquearFormulario();
-        //         }
-        //     }
-            
-        // });
 
     </script>
 
