@@ -795,7 +795,7 @@ body {
                         selectTipo.value="Aereo";
 
                         document.getElementById("txtAtr5").value= vehiculo.altMax;
-                        document.getElementById("txtAtr6").value= vehiculo.altMax;
+                        document.getElementById("txtAtr6").value= vehiculo.autonomia;
                     }
                     else
                     {
@@ -1504,8 +1504,8 @@ body {
                         vehiculos[pos].modelo=document.getElementById("txtmodelo").value;
                         vehiculos[pos].anoFab=document.getElementById("txtanoFab").value;
                         vehiculos[pos].velMax=document.getElementById("txtvelMax").value;
-                        vehiculos[pos].velMax=document.getElementById("txtAtr5").value;
-                        vehiculos[pos].altMax=document.getElementById("txtAtr6").value;
+                        vehiculos[pos].altMax=document.getElementById("txtAtr5").value;
+                        vehiculos[pos].autonomia=document.getElementById("txtAtr6").value;
                     }
                     else{
                         error=true;
